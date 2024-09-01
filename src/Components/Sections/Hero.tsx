@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { bio as Bio } from "../../Data/Constant";
 import Typewriter from "typewriter-effect";
-import HeroImg from "../../images/Avi.png";
-import HeroBgAnimation from "../HeroAnimation";
+import ProfilePic from "../../images/Avi.png";
+import HeroAnimation from "../HeroAnimation/HeroAnimation";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import {
@@ -31,7 +31,7 @@ const HeroContainer = styled.div`
   clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 95%, 0 100%);
 `;
 
-const HeroInnerContainer = styled.div`
+const ParentOfLeftAndRightDiv = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -44,7 +44,7 @@ const HeroInnerContainer = styled.div`
   }
 `;
 
-const HeroLeftContainer = styled.div`
+const LeftSideDiv = styled.div`
   width: 100%;
   order: 1;
   @media (max-width: 960px) {
@@ -57,7 +57,7 @@ const HeroLeftContainer = styled.div`
   }
 `;
 
-const HeroRightContainer = styled.div`
+const RightSideDiv = styled.div`
   width: 100%;
   order: 2;
   display: flex;
@@ -76,7 +76,7 @@ const HeroRightContainer = styled.div`
   }
 `;
 
-const Title = styled.div`
+const CustomTitleDiv = styled.div`
   font-weight: 700;
   font-size: 50px;
   color: ${({ theme }) => theme.text_primary};
@@ -113,15 +113,15 @@ const TextLoop = styled.div`
 `;
 
 const Span = styled.div`
-  cursor: pointer;
-  color: ${({ theme }) => theme.primary};
+  cursor: auto;
+  color: #05dff7;
 `;
 
 const SubTitle = styled.div`
   font-size: 20px;
-  line-height: 32px;
+  line-height: 40px;
   margin-bottom: 42px;
-  color: ${({ theme }) => theme.text_primary + 95};
+  color: #cfc6c8;
 
   @media (max-width: 960px) {
     text-align: center;
@@ -129,7 +129,7 @@ const SubTitle = styled.div`
 
   @media (max-width: 960px) {
     font-size: 16px;
-    line-height: 32px;
+    line-height: 35px;
   }
 `;
 
@@ -139,37 +139,37 @@ const ResumeButton = styled.a`
   appearance: button;
   text-decoration: none;
 
-  width: 95%;
+  width: 100%;
   max-width: 300px;
   text-align: center;
   padding: 16px 0;
 
   background: hsla(271, 100%, 50%, 1);
   background: linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
+    300deg,
+    hsla(271, 100%, 50%, 1) 30%,
+    hsla(294, 100%, 50%, 1) 70%
   );
   background: -moz-linear-gradient(
-    225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
+    300deg,
+    hsla(271, 100%, 50%, 1) 30%,
+    hsla(294, 100%, 50%, 1) 70%
   );
   background: -webkit-linear-gradient(
     225deg,
-    hsla(271, 100%, 50%, 1) 0%,
-    hsla(294, 100%, 50%, 1) 100%
+    hsla(271, 100%, 50%, 1) 20%,
+    hsla(294, 100%, 50%, 1) 80%
   );
-  box-shadow: 20px 20px 60px #1f2634, -20px -20px 60px #1f2634;
-  border-radius: 50px;
-  font-weight: 600;
+  box-shadow: 0px 15px 30px #18717a, -0px -0px 50px #18717a;
+  border-radius: 90px;
+  font-weight: 900;
   font-size: 20px;
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.19);
     transition: all 0.4s ease-in-out;
-    box-shadow: 20px 20px 60px #1f2634;
-    filter: brightness(1);
+    box-shadow: 0px 0px 50px #18717a;
+    filter: brightness(1.1);
   }
 
   @media (max-width: 640px) {
@@ -179,13 +179,13 @@ const ResumeButton = styled.a`
   color: white;
 `;
 
-const Img = styled.img`
+const CustomImageViewer = styled.img`
   border-radius: 50%;
   width: 100%;
   height: 100%;
   max-width: 400px;
   max-height: 400px;
-  border: 2px solid ${({ theme }) => theme.primary};
+  border: 2px solid #03fc45;
 
   @media (max-width: 640px) {
     max-width: 280px;
@@ -223,16 +223,16 @@ const Hero: React.FC = () => {
       <HeroContainer>
         <HeroBg>
           <StarCanvas />
-          <HeroBgAnimation />
+          <HeroAnimation />
         </HeroBg>
 
         <motion.div {...headContainerAnimation}>
-          <HeroInnerContainer>
-            <HeroLeftContainer>
+          <ParentOfLeftAndRightDiv>
+            <LeftSideDiv>
               <motion.div {...headTextAnimation}>
-                <Title>
+                <CustomTitleDiv>
                   Hi, I am <br /> {Bio.name}
-                </Title>
+                </CustomTitleDiv>
                 <TextLoop>
                   I am a
                   <Span>
@@ -241,6 +241,7 @@ const Hero: React.FC = () => {
                         strings: Bio.roles,
                         autoStart: true,
                         loop: true,
+                        delay: 80,
                       }}
                     />
                   </Span>
@@ -254,15 +255,15 @@ const Hero: React.FC = () => {
               <ResumeButton href={Bio.resume} target="_blank">
                 Check Resume
               </ResumeButton>
-            </HeroLeftContainer>
-            <HeroRightContainer>
+            </LeftSideDiv>
+            <RightSideDiv>
               <motion.div {...headContentAnimation}>
-                <Tilt>
-                  <Img src={HeroImg} alt="Rishav Chanda" />
+                <Tilt options={{ speed: 1000, scale: 1.3, transition: true }}>
+                  <CustomImageViewer src={ProfilePic} alt="Rishav Chanda" />
                 </Tilt>
               </motion.div>
-            </HeroRightContainer>
-          </HeroInnerContainer>
+            </RightSideDiv>
+          </ParentOfLeftAndRightDiv>
         </motion.div>
       </HeroContainer>
     </div>

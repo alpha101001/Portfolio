@@ -65,9 +65,10 @@ interface Timeline {
 export const bio: Bio = {
   name: "Avishek Roy",
   roles: [
-    "Full Stack Developer",
+    "Software Engineer",
     "Blockchain Enthusiast",
     "Problem Solver",
+    "Full Stack Developer",
     "Programmer",
   ],
   description:

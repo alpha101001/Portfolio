@@ -3,18 +3,28 @@ import { Link as LinkR } from "react-router-dom";
 import styled, { useTheme } from "styled-components";
 import { bio as Bio } from "../Data/Constant";
 import { MenuRounded } from "@mui/icons-material";
-
+import { color } from "framer-motion";
 const Nav = styled.div`
   background-color: ${({ theme }) => theme.bg};
-  height: 60px;
+  height: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 2rem;
   position: sticky;
-  top: 1;
+  top: 0;
   z-index: 10;
   color: yellow;
+  &::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 1px; /* Adjust the thickness of the bottom line */
+    background-color: #03fc45; /* Set the bottom line color */
+    position: absolute;
+    bottom: 0;
+    left: 0;
+  }
 `;
 const NavbarContainer = styled.div`
   width: 100%;
@@ -23,7 +33,7 @@ const NavbarContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1rem;
+  font-size: 1.1rem;
 `;
 const NavLogo = styled(LinkR)`
   width: 80%;
@@ -67,7 +77,7 @@ const ButtonContainer = styled.div`
   }
 `;
 const GithubButton = styled.a`
-  border: 1px solid ${({ theme }) => theme.primary};
+  border: 1px solid #0dded7;
   color: yellow;
   justify-content: center;
   display: flex;
@@ -77,11 +87,11 @@ const GithubButton = styled.a`
   padding: 10px 20px;
   font-size: 16px;
   font-weight: 500;
-  transition: all 0.6s ease-in-out;
+  transition: all 0.3s ease-in-out;
   text-decoration: none;
   &:hover {
-    background: ${({ theme }) => theme.primary};
-    color: ${({ theme }) => theme.text_primary};
+    background: #faf602;
+    color: #000000;
   }
 `;
 const MobileIcon = styled.div`
@@ -98,33 +108,30 @@ const MobileMenu = styled.ul<{ isOpen: boolean }>`
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   gap: 16px;
-  padding: 0 6px;
-  list-style: none;
-  width: 100%;
   padding: 12px 40px 24px 40px;
+  list-style: none;
   background: ${({ theme }) => theme.card_light + 99};
   position: absolute;
-  top: 80px;
+  top: 70px; /* Positioned just below the red line */
   right: 0;
-  transition: all 0.6s ease-in-out;
+  transition: transform 2s cubic-bezier(0.68, -0.55, 0.27, 1.55),opacity 2s ease-in-out; /* Slower transition effect */
   transform: ${({ isOpen }) =>
-    isOpen ? "translateY(0)" : "translateY(-100%)"};
+    isOpen ? "translateY(0)" : "translateY(-100%)"}; /* Slide down */
   border-radius: 0 0 20px 20px;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  opacity: ${({ isOpen }) => (isOpen ? "100%" : "0")};
-  z-index: ${({ isOpen }) => (isOpen ? "1000" : "-1000")};
+  opacity: ${({ isOpen }) => (isOpen ? "1" : "0")}; /* Fade in */
+  z-index: ${({ isOpen }) => (isOpen ? "1000" : "-1")}; /* Hide when closed */
 `;
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const theme = useTheme();
   return (
-    <Nav>
-      <NavbarContainer>
+    <Nav >
+      <NavbarContainer >
         <NavLogo to="/"><b>Portfolio</b></NavLogo>
         <MobileIcon onClick={() => setIsOpen(!isOpen)}>
-          <MenuRounded style={{ color: "inherit" }} />
+          <MenuRounded style={{ color: "yellow" }} />
         </MobileIcon>
         <NavItems>
           <NavLink href="#About">About</NavLink>
@@ -153,10 +160,6 @@ const Navbar: React.FC = () => {
             <GithubButton
               href={Bio.github}
               target="_blank"
-              style={{
-                background: theme.primary,
-                color: theme.text_primary,
-              }}
             >
               Github Profile
             </GithubButton>
