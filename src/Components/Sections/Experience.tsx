@@ -1,11 +1,18 @@
 import React from "react";
 import { VerticalTimeline } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { experiences } from "../../Data/Constant";
 import ExperienceCard from "../Cards/ExperienceCard";
-
-const Container = styled.div`
+const NeonColorEffect = keyframes`
+  0%, 100% {
+    text-shadow: 0 0 4px #7f03fc, 0 0 8px #7f03fc, 0 0 12px #03eeff;
+  }
+  50% {
+    text-shadow: 0 0 2px #1303fc, 0 0 4px #03eeff, 0 0 6px #03eeff;
+  }
+`;
+const ParentContainerDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -15,7 +22,7 @@ const Container = styled.div`
   align-items: center;
 `;
 
-const Wrapper = styled.div`
+const ChildContainerDiv = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -28,20 +35,20 @@ const Wrapper = styled.div`
     flex-direction: column;
   }
 `;
-
-const Title = styled.div`
+const TitleDiv = styled.div`
   font-size: 52px;
   text-align: center;
   font-weight: 600;
   margin-top: 20px;
-  color: ${({ theme }) => theme.text_primary};
+  color: #fc03d7;
+  animation: ${NeonColorEffect} 3s infinite alternate;
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 32px;
-  }
+  }    
 `;
 
-const Desc = styled.div`
+const WorkDescriptionDiv = styled.div`
   font-size: 18px;
   text-align: center;
   font-weight: 600;
@@ -53,17 +60,16 @@ const Desc = styled.div`
 
 const Experience: React.FC = () => {
   return (
-    <Container id="Experience">
-      <Wrapper>
-        <Title>Experience</Title>
-        <Desc
+    <ParentContainerDiv id="Experience">
+      <ChildContainerDiv>
+        <TitleDiv>Experience</TitleDiv>
+        <WorkDescriptionDiv
           style={{
             marginBottom: "40px",
           }}
         >
-          My work experience as a software engineer and working on different
-          companies and projects.
-        </Desc>
+          My work experience as a software engineer and currently working on here:
+        </WorkDescriptionDiv>
 
         <VerticalTimeline>
           {experiences.map((experience, index) => (
@@ -73,8 +79,8 @@ const Experience: React.FC = () => {
             />
           ))}
         </VerticalTimeline>
-      </Wrapper>
-    </Container>
+      </ChildContainerDiv>
+    </ParentContainerDiv>
   );
 };
 

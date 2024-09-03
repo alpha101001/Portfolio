@@ -1,3 +1,28 @@
+import ReactIcon from "../assets/ReactIcon.svg";
+import ReduxIcon from "../assets/ReduxIcon.svg";
+import ThreeIcon from "../assets/ThreeIcon.svg";
+import MaterialUi from "../assets/MaterialUI.svg";
+import BloggingSite from "../assets/BloggingSite.png";
+import DBMSProject from "../assets/DBMSProject.png";
+import KUETLogoVector from "../assets/KUETLogoVector.svg";
+import NotreDameCollegeDhaka from "../assets/NotreDameCollegeDhaka.svg";
+import School from "../assets/School.png";
+import SNR from "../assets/SNR.png";
+import Typescript from "../assets/Typescript.svg";
+import Cpp from "../assets/cpp.svg";
+import CSharp from "../assets/CSharp.svg";
+import Python from "../assets/Python.svg";
+import Solidity from "../assets/Solidity.svg";
+import SQL from "../assets/SQL.svg";
+import Database from "../assets/Database.svg";
+import SymmetricKeyCryptography from "../assets/SymmetricKeyCryptography.png";
+import AsymmetricKeyCryptography from "../assets/AsymmetricKeyCryptography.png";
+import HashFunctions from "../assets/HashFunctions.png";
+import DigitalSignatures from "../assets/DigitalSignatures.png";
+import BlockchainCryptography from "../assets/BlockchainCryptography.png";
+import KeyManagement from "../assets/KeyManagement.png";
+import ZeroKnowledgeProofs from "../assets/ZeroKnowledgeProof.svg";
+import ECC from "../assets/ECC.svg";
 interface Bio {
   name: string;
   roles: string[];
@@ -12,12 +37,12 @@ interface Bio {
 
 interface Skill {
   title: string;
-  skills: { name: string; image: string }[];
+  skills: { name: string; image?: string }[];
 }
 
 interface Experience {
   id: number;
-  img: string;
+  image: string;
   role: string;
   company: string;
   date: string;
@@ -28,17 +53,17 @@ interface Experience {
 
 interface Education {
   id: number;
-  img: string;
+  image: string;
   school: string;
   date: string;
-  grade: string;
+  grade?: string;
   description: string;
   degree: string;
 }
 
 interface ProjectMember {
   name: string;
-  img: string;
+  image: string;
   linkedin: string;
   github: string;
 }
@@ -57,7 +82,7 @@ export interface Project {
   paperLink?: string;
 }
 
-interface Timeline {
+export interface Timeline {
   year: number;
   text: string;
 }
@@ -86,23 +111,96 @@ export const skills: Skill[] = [
     skills: [
       {
         name: "React.js",
-        image:
-          "https://drive.google.com/file/d/1UblA460QFYWvgAxGXwYP31y82fuQXYdr/view?usp=sharing",
+        image: ReactIcon,
       },
       {
-        name: "Redux.js",
-        image:
-          "https://drive.google.com/file/d/11zhljGzfCmR93QFlsHHWnrg-Pm84W7nL/view?usp=sharing",
+        name: "Redux Toolkit",
+        image: ReduxIcon,
       },
       {
         name: "Three.js",
-        image:
-          "https://drive.google.com/file/d/1S9waVZ3AIqwaugEi-1isx-PQX8f3kgq3/view?usp=sharing",
+        image: ThreeIcon,
       },
       {
         name: "Material UI",
-        image:
-          "https://drive.google.com/file/d/1Rr0zI1XDjYZPFLtC64u4U7tw6G6liFgP/view?usp=sharing",
+        image: MaterialUi,
+      },
+    ],
+  },
+  {
+    title: "Programming Languages",
+    skills: [
+      {
+        name: "TypeScript",
+        image: Typescript,
+      },
+      {
+        name: "C++",
+        image: Cpp,
+      },
+      {
+        name: "C#",
+        image: CSharp,
+      },
+      {
+        name: "Python",
+        image: Python,
+      },
+      {
+        name: "Solidity",
+        image: Solidity,
+      },
+      {
+        name: "SQL",
+        image: SQL,
+      },
+    ],
+  },
+  {
+    title: "Database Knowledge",
+    skills: [
+      {
+        name: "Database Management System",
+        image: Database,
+      },
+    ],
+  },
+  {
+    title: "Cryptography",
+    skills: [
+      {
+        name: "Symmetric Key Cryptography",
+        image: SymmetricKeyCryptography, // Replace with appropriate image asset
+      },
+      {
+        name: "Asymmetric Key Cryptography",
+        image: AsymmetricKeyCryptography, // Replace with appropriate image asset
+      },
+      {
+        name: "Hash Functions",
+        image: HashFunctions, // Replace with appropriate image asset
+      },
+
+      {
+        name: "Digital Signatures",
+        image: DigitalSignatures, // Replace with appropriate image asset
+      },
+      {
+        name: "Blockchain Cryptography",
+        image: BlockchainCryptography, // Replace with appropriate image asset
+      },
+      {
+        name: "Key Management",
+        image: KeyManagement, // Replace with appropriate image asset
+      },
+      {
+        name: "Elliptic Curve Cryptography (ECC)",
+        image: ECC, // Replace with appropriate image asset
+      },
+
+      {
+        name: "Zero-Knowledge Proofs",
+        image: ZeroKnowledgeProofs, // Replace with appropriate image asset
       },
     ],
   },
@@ -111,13 +209,13 @@ export const skills: Skill[] = [
 export const experiences: Experience[] = [
   {
     id: 0,
-    img: "https://firebasestorage.googleapis.com/v0/b/flexi-coding.appspot.com/o/neurobit.jpeg?alt=media&token=1cacbb7b-e5ea-4efb-9b3d-f5a31b9564ad",
+    image: SNR,
     role: "Software Engineer",
     company: "Sense & Respond Software LLC",
     date: "June 2024 - Present",
     description:
-      "Enhanced user experiences and developed skills while working at Sense & Respond Software LLC.",
-    skills: ["React.js", "Redux", "Material UI", "HTML", "CSS", "TypeScript"],
+      "Enhancing user experiences and developing skills while working at Sense & Respond Software LLC.",
+    skills: ["React.js", "Redux Toolkit", "Material UI", "TypeScript", "API"],
   },
 
   // Add other experiences similarly
@@ -126,30 +224,30 @@ export const experiences: Experience[] = [
 export const education: Education[] = [
   {
     id: 0,
-    img: "https://drive.google.com/file/d/1nye5e2cEaQNiyR422RXB7mnpY3ryJlP7/view?usp=sharing",
+    image: KUETLogoVector,
     school: "Khulna University of Engineering & Technology, Khulna",
     date: "2018 - 2023",
-    grade: "2.91 CGPA",
+    // grade: "2.91 CGPA",
     description:
       "I earned a Bachelor's degree in Computer Science and Engineering.",
     degree: "Bachelor of Science - BSc, Computer Science and Engineering",
   },
   {
     id: 1,
-    img: "https://drive.google.com/file/d/1D1L1W6KhyEk8-_yxZld0fKMMjFks2z3C/view?usp=sharing",
+    image: NotreDameCollegeDhaka,
     school: "Notre Dame College, Dhaka",
     date: "2016 - 2018",
-    grade: "5 GPA",
+    grade: "GPA 5 (with Scholarship)",
     description:
       "I completed my intermediate education at Notre Dame College, Dhaka, where I studied Science.",
     degree: "Higher Secondary Certificate - HSC, Science",
   },
   {
     id: 2,
-    img: "https://drive.google.com/file/d/1-FA4TsU261g4e5K8V-kTCzj4qMvDSYbl/view?usp=sharing",
+    image: School,
     school: "Seroil Govt. High School, Rajshahi",
     date: "2016",
-    grade: "5 GPA",
+    grade: "GPA 5",
     description:
       "I completed my secondary education at Seroil Govt. High School, Rajshahi, where I studied Science.",
     degree: "Secondary School Certificate - SSC, Science",
@@ -164,8 +262,7 @@ export const projects: Project[] = [
     date: "March 2022 - April 2022",
     description:
       "A comprehensive database project showcasing the versatility of SQL through a wide array of examples, demonstrating everything from basic queries to complex data manipulation and analytics techniques.",
-    image:
-      "https://drive.google.com/file/d/1j73FhCzWVmZRE5kphd61TV2yKm16Ni8X/view?usp=sharing",
+    image: DBMSProject,
     tags: ["SQL"],
     category: "Terminal app",
     github: "https://github.com/alpha101001/DBMS_Project",
@@ -177,8 +274,7 @@ export const projects: Project[] = [
     date: "April 2022 - May 2022",
     description:
       "A dynamic and user-friendly blogging platform designed for everyday bloggers. Built with ASP.NET and a MySQL database, offering a seamless experience for sharing and exploring a diverse range of blog posts.",
-    image:
-      "https://drive.google.com/file/d/1_woDeh-edr1MeXTmLRL3fo9KaapjO9Cd/view?usp=sharing",
+    image: BloggingSite,
     tags: ["C#", "MySQL", "ASP.NET"],
     category: "Web app",
     github:
@@ -232,7 +328,7 @@ export const timelineData: Timeline[] = [
   { year: 2014, text: "Started my journey of learning." },
   {
     year: 2016,
-    text: "Phase changed and started college education at NDC, where I learned about psychological aspects of life alongside my HSC education.",
+    text: "Phase changed and started college education at Notre Dame College, where I learned about psychological aspects of life alongside my HSC education.",
   },
   {
     year: 2018,

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link as LinkR } from "react-router-dom";
-import styled, { useTheme } from "styled-components";
+import styled from "styled-components";
 import { bio as Bio } from "../Data/Constant";
 import { MenuRounded } from "@mui/icons-material";
-import { color } from "framer-motion";
 const Nav = styled.div`
   background-color: ${({ theme }) => theme.bg};
   height: 70px;
@@ -20,7 +19,7 @@ const Nav = styled.div`
     display: block;
     width: 100%;
     height: 1px; /* Adjust the thickness of the bottom line */
-    background-color: #03fc45; /* Set the bottom line color */
+    background-color: #02faf2; /* Set the bottom line color */
     position: absolute;
     bottom: 0;
     left: 0;
@@ -55,14 +54,14 @@ const NavItems = styled.ul`
     display: none;
   }
 `;
-const NavLink = styled.a`
-  color: ${({ theme }) => theme.text_primary};
+const NavLink = styled.a<{ isOpen?: boolean }>`
+  color: ${({ isOpen }) => isOpen ? "#02faf2" : "#f5f7f7"};
   font-weight: 500;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   &:hover {
-    color: ${({ theme }) => theme.primary};
+    color: ${({ isOpen }) => isOpen ? "#f8fc05" : "#d705fc"};
   }
 `;
 const ButtonContainer = styled.div`
@@ -126,6 +125,22 @@ const MobileMenu = styled.ul<{ isOpen: boolean }>`
 `;
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 768) {
+        setIsOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Ensure the menu is closed initially on larger screens
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
   return (
     <Nav >
       <NavbarContainer >
@@ -138,24 +153,33 @@ const Navbar: React.FC = () => {
           <NavLink href="#Skills">Skills</NavLink>
           <NavLink href="#Experience">Experience</NavLink>
           <NavLink href="#Projects">Projects</NavLink>
+          <NavLink href="#Publications">Publications</NavLink>
           <NavLink href="#Education">Education</NavLink>
+          <NavLink href="#KnowMe">KnowMe</NavLink>
+
         </NavItems>
         {isOpen && (
           <MobileMenu isOpen={isOpen}>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#About">
+            <NavLink onClick={() => setIsOpen(!isOpen)} href="#About" isOpen={isOpen}>
               About
             </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Skills">
+            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Skills" isOpen={isOpen}>
               Skills
             </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Experience">
+            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Experience" isOpen={isOpen}>
               Experience
             </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Projects">
+            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Projects" isOpen={isOpen}>
               Projects
             </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Education">
+            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Publications" isOpen={isOpen}>
+              Publications
+            </NavLink>
+            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Education" isOpen={isOpen}>
               Education
+            </NavLink>
+            <NavLink onClick={() => setIsOpen(!isOpen)} href="#KnowMe" isOpen={isOpen}>
+              KnowMe
             </NavLink>
             <GithubButton
               href={Bio.github}

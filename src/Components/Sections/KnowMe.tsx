@@ -2,8 +2,10 @@ import React from "react";
 import { VerticalTimeline } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import styled, { keyframes } from "styled-components";
-import { education } from "../../Data/Constant";
-import EducationCard from "../Cards/EducationCard";
+import { timelineData } from "../../Data/Constant";
+import KnowMeCard from "../Cards/KnowMeCard";
+import EarthCanvas from "../Canvas/Earth";
+
 const NeonColorEffect = keyframes`
   0%, 100% {
     text-shadow: 0 0 4px #7f03fc, 0 0 8px #7f03fc, 0 0 12px #03eeff;
@@ -12,19 +14,17 @@ const NeonColorEffect = keyframes`
     text-shadow: 0 0 2px #1303fc, 0 0 4px #03eeff, 0 0 6px #03eeff;
   }
 `;
-
-const ParentContainerDiv = styled.div`
-  margin-top: 50px;
+const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  margin-top: 50px;
   position: relative;
   z-index: 1;
   align-items: center;
-  
 `;
 
-const ChildContainerDiv = styled.div`
+const Wrapper = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -36,9 +36,7 @@ const ChildContainerDiv = styled.div`
   @media (max-width: 960px) {
     flex-direction: column;
   }
-    
 `;
-
 const TitleDiv = styled.div`
   font-size: 52px;
   text-align: center;
@@ -52,7 +50,7 @@ const TitleDiv = styled.div`
   }    
 `;
 
-const EducationDescriptionDiv = styled.div`
+const AboutDiv = styled.div`
   font-size: 18px;
   text-align: center;
   font-weight: 600;
@@ -62,31 +60,33 @@ const EducationDescriptionDiv = styled.div`
   }
 `;
 
-const Education: React.FC = () => {
+const KnowMe: React.FC = () => {
   return (
-    <ParentContainerDiv id="Education">
-      <ChildContainerDiv>
-        <TitleDiv>Education</TitleDiv>
-        <EducationDescriptionDiv
+    <Container id="KnowMe">
+      <Wrapper>
+        <TitleDiv>Know Me A Little</TitleDiv>
+        <AboutDiv
           style={{
-            marginLeft: "40px",
-            marginRight: "40px",
-            // marginBottom: "40px",
+            marginLeft: "30px",
+            marginRight: "30px",
+            marginBottom: "40px",
           }}
         >
-          My education has been a journey of self-discovery and growth. My
-          educational details are as follows:
-        </EducationDescriptionDiv>
+          With a balance of introversion and extroversion, I am always eager to expand my knowledge. Know my timeline:
+        </AboutDiv>
 
         <VerticalTimeline>
-          {education.map((education, index) => (
-            <EducationCard key={`education-${index}`} education={education} />
+          {timelineData.map((timeline, index) => (
+            <KnowMeCard
+              key={`timelineData-${index}`}
+              timelineData={timeline}
+            />
           ))}
         </VerticalTimeline>
-
-      </ChildContainerDiv>
-    </ParentContainerDiv>
+        <EarthCanvas />
+      </Wrapper>
+    </Container>
   );
 };
 
-export default Education;
+export default KnowMe;
