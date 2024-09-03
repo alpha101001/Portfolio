@@ -10,6 +10,7 @@ import Education from '../Components/Sections/Education';
 import Contact from '../Components/Sections/Contact';
 import Footer from '../Components/Sections/Footer';
 import StartCanvas from "../Components/Canvas/Stars";
+import KnowMe from '../Components/Sections/KnowMe';
 interface Theme {
     bg: string;
 }
@@ -51,6 +52,7 @@ const Portfolio: React.FC = () => {
                     <Projects />
                     <Wrapper>
                         <Education />
+                        <KnowMe />
                         <Contact />
                     </Wrapper>
                     <Footer />

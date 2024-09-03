@@ -56,7 +56,7 @@ interface Education {
   image: string;
   school: string;
   date: string;
-  grade: string;
+  grade?: string;
   description: string;
   degree: string;
 }
@@ -82,7 +82,7 @@ export interface Project {
   paperLink?: string;
 }
 
-interface Timeline {
+export interface Timeline {
   year: number;
   text: string;
 }
@@ -215,15 +215,7 @@ export const experiences: Experience[] = [
     date: "June 2024 - Present",
     description:
       "Enhancing user experiences and developing skills while working at Sense & Respond Software LLC.",
-    skills: [
-      "React.js",
-      "Redux Toolkit",
-      "Material UI",
-      "HTML",
-      "CSS",
-      "TypeScript",
-      "API",
-    ],
+    skills: ["React.js", "Redux Toolkit", "Material UI", "TypeScript", "API"],
   },
 
   // Add other experiences similarly
@@ -235,7 +227,7 @@ export const education: Education[] = [
     image: KUETLogoVector,
     school: "Khulna University of Engineering & Technology, Khulna",
     date: "2018 - 2023",
-    grade: "2.91 CGPA",
+    // grade: "2.91 CGPA",
     description:
       "I earned a Bachelor's degree in Computer Science and Engineering.",
     degree: "Bachelor of Science - BSc, Computer Science and Engineering",
@@ -245,7 +237,7 @@ export const education: Education[] = [
     image: NotreDameCollegeDhaka,
     school: "Notre Dame College, Dhaka",
     date: "2016 - 2018",
-    grade: "5 GPA",
+    grade: "GPA 5 (with Scholarship)",
     description:
       "I completed my intermediate education at Notre Dame College, Dhaka, where I studied Science.",
     degree: "Higher Secondary Certificate - HSC, Science",
@@ -255,7 +247,7 @@ export const education: Education[] = [
     image: School,
     school: "Seroil Govt. High School, Rajshahi",
     date: "2016",
-    grade: "5 GPA",
+    grade: "GPA 5",
     description:
       "I completed my secondary education at Seroil Govt. High School, Rajshahi, where I studied Science.",
     degree: "Secondary School Certificate - SSC, Science",
@@ -336,7 +328,7 @@ export const timelineData: Timeline[] = [
   { year: 2014, text: "Started my journey of learning." },
   {
     year: 2016,
-    text: "Phase changed and started college education at NDC, where I learned about psychological aspects of life alongside my HSC education.",
+    text: "Phase changed and started college education at Notre Dame College, where I learned about psychological aspects of life alongside my HSC education.",
   },
   {
     year: 2018,

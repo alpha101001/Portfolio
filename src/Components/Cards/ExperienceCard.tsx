@@ -108,15 +108,7 @@ interface ExperienceCardProps {
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
   return (
     <VerticalTimelineElement
-      icon={
-        <img
-          width="100%"
-          height="100%"
-          alt={experience?.company}
-          style={{ borderRadius: "80%", objectFit: "cover" }}
-          src={experience?.image}
-        />
-      }
+
       contentStyle={{
         display: "flex",
         flexDirection: "column",
