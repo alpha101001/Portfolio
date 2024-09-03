@@ -214,8 +214,16 @@ export const experiences: Experience[] = [
     company: "Sense & Respond Software LLC",
     date: "June 2024 - Present",
     description:
-      "Enhanced user experiences and developed skills while working at Sense & Respond Software LLC.",
-    skills: ["React.js", "Redux", "Material UI", "HTML", "CSS", "TypeScript"],
+      "Enhancing user experiences and developing skills while working at Sense & Respond Software LLC.",
+    skills: [
+      "React.js",
+      "Redux Toolkit",
+      "Material UI",
+      "HTML",
+      "CSS",
+      "TypeScript",
+      "API",
+    ],
   },
 
   // Add other experiences similarly

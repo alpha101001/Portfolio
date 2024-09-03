@@ -1,10 +1,17 @@
 import React from "react";
 import { VerticalTimeline } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { experiences } from "../../Data/Constant";
 import ExperienceCard from "../Cards/ExperienceCard";
-
+const NeonColorEffect = keyframes`
+  0%, 100% {
+    text-shadow: 0 0 4px #7f03fc, 0 0 8px #7f03fc, 0 0 12px #03eeff;
+  }
+  50% {
+    text-shadow: 0 0 2px #1303fc, 0 0 4px #03eeff, 0 0 6px #03eeff;
+  }
+`;
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -28,17 +35,18 @@ const Wrapper = styled.div`
     flex-direction: column;
   }
 `;
-
-const Title = styled.div`
+const TitleDiv = styled.div`
   font-size: 52px;
   text-align: center;
   font-weight: 600;
   margin-top: 20px;
-  color: ${({ theme }) => theme.text_primary};
+  color: #fc03d7;
+  animation: ${NeonColorEffect} 3s infinite alternate;
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 32px;
   }
+    
 `;
 
 const Desc = styled.div`
@@ -55,14 +63,13 @@ const Experience: React.FC = () => {
   return (
     <Container id="Experience">
       <Wrapper>
-        <Title>Experience</Title>
+        <TitleDiv>Experience</TitleDiv>
         <Desc
           style={{
             marginBottom: "40px",
           }}
         >
-          My work experience as a software engineer and working on different
-          companies and projects.
+          My work experience as a software engineer and currently working on here.
         </Desc>
 
         <VerticalTimeline>
