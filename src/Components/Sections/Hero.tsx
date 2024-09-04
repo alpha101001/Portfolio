@@ -185,7 +185,7 @@ const CustomImageViewer = styled.img`
   height: 100%;
   max-width: 400px;
   max-height: 400px;
-  border: 2px solid #03fc45;
+  border: 2px solid #8A0D5E;
 
   @media (max-width: 640px) {
     max-width: 280px;

@@ -1,9 +1,9 @@
 import React from "react";
-import { VerticalTimeline } from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
 import styled, { keyframes } from "styled-components";
-import { experiences } from "../../Data/Constant";
-import ExperienceCard from "../Cards/ExperienceCard";
+import { conferencePapers } from "../../Data/Constant";
+import ConferencePaperCard from "../Cards/ConferencePaperCard";
+
+// Title animation
 const NeonColorEffect = keyframes`
   0%, 100% {
     text-shadow: 0 0 4px #7f03fc, 0 0 8px #7f03fc, 0 0 12px #03eeff;
@@ -12,11 +12,13 @@ const NeonColorEffect = keyframes`
     text-shadow: 0 0 2px #1303fc, 0 0 4px #03eeff, 0 0 6px #03eeff;
   }
 `;
+
 const ParentContainerDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   margin-top: 50px;
+  padding: 0px 16px;
   position: relative;
   z-index: 1;
   align-items: center;
@@ -34,8 +36,8 @@ const ChildContainerDiv = styled.div`
   @media (max-width: 960px) {
     flex-direction: column;
   }
-    
 `;
+
 const TitleDiv = styled.div`
   font-size: 52px;
   text-align: center;
@@ -46,10 +48,10 @@ const TitleDiv = styled.div`
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 32px;
-  }    
+  }
 `;
 
-const WorkDescriptionDiv = styled.div`
+const PaperDescriptionDiv = styled.div`
   font-size: 18px;
   text-align: center;
   font-weight: 600;
@@ -59,30 +61,33 @@ const WorkDescriptionDiv = styled.div`
   }
 `;
 
-const Experience: React.FC = () => {
-  return (
-    <ParentContainerDiv id="Experience">
-      <ChildContainerDiv>
-        <TitleDiv>Experience</TitleDiv>
-        <WorkDescriptionDiv
-          style={{
-            marginBottom: "40px",
-          }}
-        >
-          My work experience as a software engineer and currently working on here:
-        </WorkDescriptionDiv>
+const CardContainerDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+  padding-top: 30px;
+`;
 
-        <VerticalTimeline>
-          {experiences.map((experience, index) => (
-            <ExperienceCard
-              key={`experience-${index}`}
-              experience={experience}
-            />
-          ))}
-        </VerticalTimeline>
-      </ChildContainerDiv>
-    </ParentContainerDiv>
-  );
+const ConferencePapers: React.FC = () => {
+
+   return (
+      <ParentContainerDiv id="ConferencePapers">
+         <ChildContainerDiv>
+            <TitleDiv>Conference Papers (2023)</TitleDiv>
+            <PaperDescriptionDiv>
+               Below are my published conference papers on blockchain and related technologies.
+            </PaperDescriptionDiv>
+
+            <CardContainerDiv>
+               {conferencePapers.map((paper, index) => (
+                  <ConferencePaperCard key={index} paper={paper} />
+               ))}
+            </CardContainerDiv>
+         </ChildContainerDiv>
+      </ParentContainerDiv>
+   );
 };
 
-export default Experience;
+export default ConferencePapers;

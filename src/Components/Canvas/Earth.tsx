@@ -1,11 +1,27 @@
 import React, { Suspense } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useLoader } from "@react-three/fiber";
 import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
-
+import { TextureLoader } from "three";
+import { MeshStandardMaterial } from "three";
 const Earth: React.FC = () => {
-    const earth = useGLTF("../../../public/Planet/scene.gltf");
+    const earth = useGLTF("/public/Planet/scene.gltf");
+    const texture = useLoader(TextureLoader, "/public/Texture/earth.png");
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    earth.scene.traverse((node: any) => {
+        if (node.isMesh) {
+            if (node.material.name === 'Planet') {
+                node.material = new MeshStandardMaterial({ map: texture }); // Apply texture to the planet
+            } else if (node.material.name === 'Clouds' || node.material.name === 'Clouds_1') {
+                // Optionally apply a material or adjust cloud properties here
+                // Example: Adjust opacity or use a cloud texture
+                node.material.transparent = true; // Ensure clouds are transparent
+                node.material.opacity = 0.8; // Adjust opacity for clouds
+            }
+        }
+    });
     return (
-        <primitive object={earth.scene} scale={3} position-y={0} rotation-y={0} />
+        <primitive object={earth.scene} scale={3} position-y={0} rotation-y={1} />
     );
 };
 
@@ -14,7 +30,7 @@ const EarthCanvas: React.FC = () => {
         <Canvas
             shadows
             frameloop="demand"
-            dpr={[1, 2]}
+            dpr={[1, 3]}
             gl={{ preserveDrawingBuffer: true }}
             camera={{
                 fov: 45,
