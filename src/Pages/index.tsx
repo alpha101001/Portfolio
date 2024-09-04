@@ -11,6 +11,7 @@ import Contact from '../Components/Sections/Contact';
 import Footer from '../Components/Sections/Footer';
 import StartCanvas from "../Components/Canvas/Stars";
 import KnowMe from '../Components/Sections/KnowMe';
+import ConferencePapers from '../Components/Sections/ConferencePaper';
 interface Theme {
     bg: string;
 }
@@ -47,9 +48,14 @@ const Portfolio: React.FC = () => {
                     <Hero />
                     <Wrapper>
                         <Skills />
+
                         <Experience />
                     </Wrapper>
-                    <Projects />
+                    <Wrapper>
+                        <Projects />
+                        <ConferencePapers />
+                    </Wrapper>
+
                     <Wrapper>
                         <Education />
                         <KnowMe />

@@ -153,7 +153,7 @@ const Navbar: React.FC = () => {
           <NavLink href="#Skills">Skills</NavLink>
           <NavLink href="#Experience">Experience</NavLink>
           <NavLink href="#Projects">Projects</NavLink>
-          <NavLink href="#Publications">Publications</NavLink>
+          <NavLink href="#ConferencePapers">Publications</NavLink>
           <NavLink href="#Education">Education</NavLink>
           <NavLink href="#KnowMe">KnowMe</NavLink>
 

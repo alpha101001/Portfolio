@@ -47,7 +47,7 @@ const CompanyNameDiv = styled.div`
 const WorkTimelineDiv = styled.div`
   font-size: 12px;
   font-weight: 400;
-  color: #c95f9b;
+  color: #A0C4FF;
   @media only screen and (max-width: 768px) {
     font-size: 10px;
   }
@@ -57,7 +57,7 @@ const CompanyDescription = styled.div`
   width: 100%;
   font-size: 15px;
   font-weight: 400;
-  color: #9fe0de;
+  color: #AFC6C7;
   margin-bottom: 10px;
   @media only screen and (max-width: 768px) {
     font-size: 12px;

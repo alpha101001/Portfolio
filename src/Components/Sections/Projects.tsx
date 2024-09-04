@@ -1,10 +1,17 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { projects } from "../../Data/Constant";
 import ProjectCard from "../Cards/ProjectCard";
 
-
-const Container = styled.div`
+const NeonColorEffect = keyframes`
+  0%, 100% {
+    text-shadow: 0 0 4px #7f03fc, 0 0 8px #7f03fc, 0 0 12px #03eeff;
+  }
+  50% {
+    text-shadow: 0 0 2px #1303fc, 0 0 4px #03eeff, 0 0 6px #03eeff;
+  }
+`;
+const ParentContainerDiv = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -13,9 +20,11 @@ const Container = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
+  
+  
 `;
 
-const Wrapper = styled.div`
+const ChildContainerDiv = styled.div`
   position: relative;
   display: flex;
   justify-content: space-between;
@@ -27,21 +36,25 @@ const Wrapper = styled.div`
   @media (max-width: 960px) {
     flex-direction: column;
   }
+  
+    
 `;
 
-const Title = styled.div`
+const TitleDiv = styled.div`
   font-size: 52px;
   text-align: center;
   font-weight: 600;
   margin-top: 20px;
-  color: ${({ theme }) => theme.text_primary};
+  color: #fc03d7;
+  animation: ${NeonColorEffect} 3s infinite alternate;
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 32px;
-  }
+  }    
+    
 `;
 
-const Desc = styled.div`
+const ProjectDescriptionDiv = styled.div`
   font-size: 18px;
   text-align: center;
   font-weight: 600;
@@ -49,6 +62,7 @@ const Desc = styled.div`
   @media (max-width: 768px) {
     font-size: 16px;
   }
+    
 `;
 
 const ToggleButtonGroup = styled.div`
@@ -63,51 +77,52 @@ const ToggleButtonGroup = styled.div`
     font-size: 12px;
   }
 `;
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const ToggleButton = styled.div<{ $active: any }>`
+const ToggleButton = styled.div<{ $active: boolean }>`
   padding: 8px 18px;
   border-radius: 6px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background: ${({ $active }) => ($active ? '#5F26AD' : 'transparent')};
+  color: ${({ $active }) => ($active ? '#ffffff' : '#a259ff')}; 
+  
   &:hover {
-    background: ${({ theme }) => theme.primary + 20};
+    background: ${({ $active }) => ($active ? '#a259ff' : '#6a0dad')}; 
+    color: #ffffff; /* White on hover */
   }
+
   @media (max-width: 768px) {
     padding: 6px 8px;
     border-radius: 4px;
   }
-  ${({ $active, theme }) =>
-    $active &&
-    `
-  background:  ${theme.primary + 20};
-  `}
 `;
 const Divider = styled.div`
   width: 1.5px;
   background: ${({ theme }) => theme.primary};
 `;
 
-const CardContainer = styled.div`
+const CardContainerDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 28px;
   flex-wrap: wrap;
+  padding-top: 30px;
 `;
 
 const Projects: React.FC = () => {
   const [toggle, setToggle] = useState("all");
   return (
-    <Container id="Projects">
-      <Wrapper>
-        <Title>Projects</Title>
-        <Desc
+    <ParentContainerDiv id="Projects">
+      <ChildContainerDiv>
+        <TitleDiv>Projects</TitleDiv>
+        <ProjectDescriptionDiv
           style={{
             marginBottom: "40px",
           }}
         >
           I have worked on a wide range of projects. From web apps to android
           apps. Here are some of my projects.
-        </Desc>
+        </ProjectDescriptionDiv>
 
         <ToggleButtonGroup>
           <ToggleButton
@@ -118,28 +133,23 @@ const Projects: React.FC = () => {
           </ToggleButton>
           <Divider />
           <ToggleButton
-            $active={toggle === "web app"}
-            onClick={() => setToggle("web app")}
+            $active={toggle === "Web app"}
+            onClick={() => setToggle("Web app")}
           >
-            WEB APP'S
+            Web App
           </ToggleButton>
           <Divider />
           <ToggleButton
-            $active={toggle === "android app"}
-            onClick={() => setToggle("android app")}
+            $active={toggle === "Terminal Project"}
+            onClick={() => setToggle("Terminal Project")}
           >
-            ANDROID APP'S
+            Terminal Project
           </ToggleButton>
           <Divider />
-          <ToggleButton
-            $active={toggle === "machine learning"}
-            onClick={() => setToggle("machine learning")}
-          >
-            MACHINE LEARNING
-          </ToggleButton>
+
         </ToggleButtonGroup>
 
-        <CardContainer>
+        <CardContainerDiv>
           {toggle === "all" &&
             projects.map((project, index) => (
               <ProjectCard key={index} project={project} />
@@ -149,9 +159,9 @@ const Projects: React.FC = () => {
             .map((project, index) => (
               <ProjectCard key={index} project={project} />
             ))}
-        </CardContainer>
-      </Wrapper>
-    </Container>
+        </CardContainerDiv>
+      </ChildContainerDiv>
+    </ParentContainerDiv>
   );
 };
 

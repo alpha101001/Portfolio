@@ -93,7 +93,7 @@ export const bio: Bio = {
     "Software Engineer",
     "Blockchain Enthusiast",
     "Problem Solver",
-    "Full Stack Developer",
+    "Frontend Developer",
     "Programmer",
   ],
   description:
@@ -227,7 +227,7 @@ export const education: Education[] = [
     image: KUETLogoVector,
     school: "Khulna University of Engineering & Technology, Khulna",
     date: "2018 - 2023",
-    // grade: "2.91 CGPA",
+    grade: "CGPA 2.91",
     description:
       "I earned a Bachelor's degree in Computer Science and Engineering.",
     degree: "Bachelor of Science - BSc, Computer Science and Engineering",
@@ -264,7 +264,7 @@ export const projects: Project[] = [
       "A comprehensive database project showcasing the versatility of SQL through a wide array of examples, demonstrating everything from basic queries to complex data manipulation and analytics techniques.",
     image: DBMSProject,
     tags: ["SQL"],
-    category: "Terminal app",
+    category: "Terminal Project",
     github: "https://github.com/alpha101001/DBMS_Project",
     webapp: "https://github.com/alpha101001/DBMS_Project",
   },
@@ -275,7 +275,7 @@ export const projects: Project[] = [
     description:
       "A dynamic and user-friendly blogging platform designed for everyday bloggers. Built with ASP.NET and a MySQL database, offering a seamless experience for sharing and exploring a diverse range of blog posts.",
     image: BloggingSite,
-    tags: ["C#", "MySQL", "ASP.NET"],
+    tags: ["C#     ", "MySQL     ", "ASP.NET     "],
     category: "Web app",
     github:
       "https://github.com/alpha101001/Blogging-Site-Web-Project---ASP.NET-",
@@ -320,8 +320,6 @@ export const conferencePapers: Project[] = [
     category: "Conference paper",
     paperLink: "https://ieeexplore.ieee.org/document/10441286",
   },
-
-  // Add other projects similarly
 ];
 
 export const timelineData: Timeline[] = [
