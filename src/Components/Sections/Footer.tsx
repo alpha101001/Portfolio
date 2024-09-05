@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { bio as Bio } from "../../Data/Constant";
 import {
   FacebookRounded,
-  Instagram,
   LinkedIn,
 } from "@mui/icons-material";
 

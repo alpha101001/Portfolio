@@ -1,11 +1,7 @@
 import React from "react";
 import { VerticalTimelineElement } from "react-vertical-timeline-component";
 import styled from "styled-components";
-import AdjustIcon from '@mui/icons-material/Adjust';
 import { Timeline } from "../../Data/Constant";
-
-
-
 
 const AboutDiv = styled.div`
   font-size: 15px;
