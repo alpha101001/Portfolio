@@ -4,8 +4,8 @@ import { OrbitControls, Preload, useGLTF } from "@react-three/drei";
 import { TextureLoader } from "three";
 import { MeshStandardMaterial } from "three";
 const Earth: React.FC = () => {
-    const earth = useGLTF("/public/Planet/scene.gltf");
-    const texture = useLoader(TextureLoader, "/public/Texture/earth.png");
+    const earth = useGLTF("/Planet/scene.gltf");
+    const texture = useLoader(TextureLoader, "/Texture/earth.png");
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     earth.scene.traverse((node: any) => {
