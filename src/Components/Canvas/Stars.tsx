@@ -15,7 +15,7 @@ const CanvasWrapperDiv = styled.div`
 const Stars: React.FC = (props) => {
     const ref = useRef<THREE.Points>(null);
     const [sphere] = useState(() =>
-        random.inSphere(new Float32Array(8000), { radius: 1.2 })
+        random.inSphere(new Float32Array(4000), { radius: 1.2 })
     );
 
     useFrame((state, delta) => {

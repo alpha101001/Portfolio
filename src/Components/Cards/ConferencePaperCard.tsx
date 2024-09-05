@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Project } from "../../Data/Constant";
 
 interface ConferencePaperCardProps {
-   paper: Project;
+  paper: Project;
 }
 
 const Card = styled.div`
@@ -33,7 +33,7 @@ const Card = styled.div`
 `;
 
 
-const Title = styled.div`
+const TitleDiv = styled.div`
   font-size: 20px;
   font-weight: 600;
   color: #00E5FF;
@@ -65,16 +65,16 @@ const Button = styled.a`
 `;
 
 const ConferencePaperCard: React.FC<ConferencePaperCardProps> = ({ paper }) => {
-   return (
-      <Card>
-         <Title>{paper.title}</Title>
+  return (
+    <Card>
+      <TitleDiv>{paper.title}</TitleDiv>
 
-         <PaperDescriptionDiv>{paper.description}</PaperDescriptionDiv>
-         <Button href={paper.paperLink} target="_blank">
-            View Paper
-         </Button>
-      </Card>
-   );
+      <PaperDescriptionDiv>{paper.description}</PaperDescriptionDiv>
+      <Button href={paper.paperLink} target="_blank">
+        View Paper
+      </Button>
+    </Card>
+  );
 };
 
 export default ConferencePaperCard;

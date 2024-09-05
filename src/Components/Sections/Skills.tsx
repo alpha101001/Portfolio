@@ -139,7 +139,7 @@ const Skills: React.FC = () => {
   return (
     <ContainerDiv id="Skills">
       <WrapperDiv>
-        <TitleDiv>Skills</TitleDiv>
+        <TitleDiv>Skills & Knowledges</TitleDiv>
         <DescriptionDiv
           style={{
             marginBottom: "40px",

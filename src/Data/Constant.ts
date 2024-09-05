@@ -23,6 +23,10 @@ import BlockchainCryptography from "../assets/BlockchainCryptography.png";
 import KeyManagement from "../assets/KeyManagement.png";
 import ZeroKnowledgeProofs from "../assets/ZeroKnowledgeProof.svg";
 import ECC from "../assets/ECC.svg";
+import WindowsOS from "../assets/WindowsOS.svg";
+import ParrotOS from "../assets/ParrotOS.png";
+import KaliLinuxOS from "../assets/KaliLinuxOS.svg";
+import FedoraOS from "../assets/FedoraOS.svg";
 interface Bio {
   name: string;
   roles: string[];
@@ -166,7 +170,28 @@ export const skills: Skill[] = [
     ],
   },
   {
-    title: "Cryptography",
+    title: "Practical Experience in Operating Systems",
+    skills: [
+      {
+        name: "Microsoft Windows",
+        image: WindowsOS,
+      },
+      {
+        name: "Parrot Security OS",
+        image: ParrotOS,
+      },
+      {
+        name: "Fedora Linux",
+        image: FedoraOS,
+      },
+      {
+        name: "Kali Linux",
+        image: KaliLinuxOS,
+      },
+    ],
+  },
+  {
+    title: "Cryptography Knowledge",
     skills: [
       {
         name: "Symmetric Key Cryptography",

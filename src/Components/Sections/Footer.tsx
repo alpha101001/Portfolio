@@ -5,7 +5,6 @@ import {
   FacebookRounded,
   Instagram,
   LinkedIn,
-  Twitter,
 } from "@mui/icons-material";
 
 const FooterContainer = styled.div`
@@ -28,10 +27,10 @@ const FooterWrapper = styled.div`
   color: ${({ theme }) => theme.text_primary};
 `;
 
-const Logo = styled.div`
-  font-weight: 600;
-  font-size: 20px;
-  color: ${({ theme }) => theme.primary};
+const LogoDiv = styled.div`
+  font-weight: 700;
+  font-size: 50px;
+  color: #03FBFB;
 `;
 
 const Nav = styled.ul`
@@ -54,10 +53,11 @@ const Nav = styled.ul`
 const NavLink = styled.a`
   color: ${({ theme }) => theme.text_primary};
   text-decoration: none;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   transition: color 0.2s ease-in-out;
   &:hover {
-    color: ${({ theme }) => theme.primary};
+    color: #d705fc;
+    scale: 1.2;
   }
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -91,13 +91,15 @@ const Footer: React.FC = () => {
   return (
     <FooterContainer>
       <FooterWrapper>
-        <Logo>Avishek Roy</Logo>
+        <LogoDiv>Avishek Roy</LogoDiv>
         <Nav>
           <NavLink href="#About">About</NavLink>
           <NavLink href="#Skills">Skills</NavLink>
           <NavLink href="#Experience">Experience</NavLink>
           <NavLink href="#Projects">Projects</NavLink>
+          <NavLink href="#ConferencePapers">Publications</NavLink>
           <NavLink href="#Education">Education</NavLink>
+          <NavLink href="#KnowMe">KnowMe</NavLink>
         </Nav>
         <SocialMediaIcons>
           <SocialMediaIcon href={Bio.facebook} target="display">
@@ -107,9 +109,7 @@ const Footer: React.FC = () => {
           <SocialMediaIcon href={Bio.linkedin} target="display">
             <LinkedIn />
           </SocialMediaIcon>
-          <SocialMediaIcon href={Bio.instagram} target="display">
-            <Instagram />
-          </SocialMediaIcon>
+
         </SocialMediaIcons>
         <Copyright>&copy; 2024 Avishek Roy. All rights reserved.</Copyright>
       </FooterWrapper>

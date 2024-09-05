@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import NavBar from '../Components/NavBar';
-import Hero from '../Components/Sections/Hero';
+import ProfileImage from '../Components/Sections/ProfileImage';
 import Skills from '../Components/Sections/Skills';
 import Experience from '../Components/Sections/Experience';
 import Projects from '../Components/Sections/Projects';
@@ -45,7 +45,7 @@ const Portfolio: React.FC = () => {
             <Body>
                 <StartCanvas />
                 <div>
-                    <Hero />
+                    <ProfileImage />
                     <Wrapper>
                         <Skills />
 

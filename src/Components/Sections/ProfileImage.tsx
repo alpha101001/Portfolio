@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { bio as Bio } from "../../Data/Constant";
 import Typewriter from "typewriter-effect";
 import ProfilePic from "../../images/Avi.png";
-import HeroAnimation from "../HeroAnimation/HeroAnimation";
+import ProfileAnimation from "../ProfileAnimation/ProfileAnimation";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
 import {
@@ -13,7 +13,7 @@ import {
 } from "../../Utils/Motion";
 import StarCanvas from "../Canvas/Stars";
 
-const HeroContainer = styled.div`
+const ProfileContainer = styled.div`
   display: flex;
   justify-content: center;
   position: relative;
@@ -193,7 +193,7 @@ const CustomImageViewer = styled.img`
   }
 `;
 
-const HeroBg = styled.div`
+const ProfileImageBg = styled.div`
   position: absolute;
   display: flex;
   justify-content: end;
@@ -217,14 +217,14 @@ const HeroBg = styled.div`
   }
 `;
 
-const Hero: React.FC = () => {
+const ProfileImage: React.FC = () => {
   return (
     <div id="About">
-      <HeroContainer>
-        <HeroBg>
+      <ProfileContainer>
+        <ProfileImageBg>
           <StarCanvas />
-          <HeroAnimation />
-        </HeroBg>
+          <ProfileAnimation />
+        </ProfileImageBg>
 
         <motion.div {...headContainerAnimation}>
           <ParentOfLeftAndRightDiv>
@@ -265,9 +265,9 @@ const Hero: React.FC = () => {
             </RightSideDiv>
           </ParentOfLeftAndRightDiv>
         </motion.div>
-      </HeroContainer>
+      </ProfileContainer>
     </div>
   );
 };
 
-export default Hero;
+export default ProfileImage;
