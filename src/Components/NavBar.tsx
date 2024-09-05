@@ -38,7 +38,7 @@ const NavLogo = styled(LinkR)`
   width: 80%;
   padding: 0 6px;
   font-weight: 500;
-  font-size: 18px;
+  font-size: 32px;
   text-decoration: none;
   color: inherit;
 `;
@@ -57,11 +57,13 @@ const NavItems = styled.ul`
 const NavLink = styled.a<{ isOpen?: boolean }>`
   color: ${({ isOpen }) => isOpen ? "#02faf2" : "#f5f7f7"};
   font-weight: 500;
+  font-size: 18px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   text-decoration: none;
   &:hover {
     color: ${({ isOpen }) => isOpen ? "#f8fc05" : "#d705fc"};
+    scale: 1.2;
   }
 `;
 const ButtonContainer = styled.div`
@@ -91,6 +93,7 @@ const GithubButton = styled.a`
   &:hover {
     background: #faf602;
     color: #000000;
+    scale: 1.1;
   }
 `;
 const MobileIcon = styled.div`
@@ -150,12 +153,12 @@ const Navbar: React.FC = () => {
         </MobileIcon>
         <NavItems>
           <NavLink href="#About">About</NavLink>
-          <NavLink href="#Skills">Skills</NavLink>
+          <NavLink href="#Skills">Skills & Knowledges</NavLink>
           <NavLink href="#Experience">Experience</NavLink>
           <NavLink href="#Projects">Projects</NavLink>
           <NavLink href="#ConferencePapers">Publications</NavLink>
           <NavLink href="#Education">Education</NavLink>
-          <NavLink href="#KnowMe">KnowMe</NavLink>
+          <NavLink href="#KnowMe">Know Me</NavLink>
 
         </NavItems>
         {isOpen && (
