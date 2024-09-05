@@ -1,6 +1,5 @@
 import React, { useRef, FormEvent } from "react";
 import styled from "styled-components";
-import emailjs from "@emailjs/browser";
 
 const Container = styled.div`
   display: flex;
@@ -111,52 +110,56 @@ const ContactButton = styled.input`
 `;
 
 const Contact: React.FC = () => {
-    const form = useRef<HTMLFormElement>(null);
+  const form = useRef<HTMLFormElement>(null);
 
-    const handleSubmit = (e: FormEvent) => {
-        e.preventDefault();
-        if (form.current) {
-            emailjs
-                .sendForm(
-                    "service_tox7kqs",
-                    "template_nv7k7mj",
-                    form.current,
-                    "SybVGsYS52j2TfLbi"
-                )
-                .then(
-                    () => {
-                        alert("Message Sent");
-                        form.current?.reset();
-                    },
-                    (error) => {
-                        alert(error.text);
-                    }
-                );
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(form.current!);
+    formData.append('service_id', 'service_alpha');
+    formData.append('template_id', 'template_drv7ed4');
+    formData.append('user_id', 'cDTK7OE1cfnZJOvrS');
+
+    fetch('https://api.emailjs.com/api/v1.0/email/send-form', {
+      method: 'POST',
+      body: formData,
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert('Your mail is sent!');
+          form.current?.reset();
+        } else {
+          return response.json().then((data) => {
+            throw new Error(data.error || 'Failed to send email');
+          });
         }
-    };
+      })
+      .catch((error) => {
+        alert('Oops... ' + error.message);
+      });
+  };
 
-    return (
-        <Container id="Education">
-            <Wrapper>
-                <Title>Contact</Title>
-                <Desc
-                    style={{
-                        marginBottom: "40px",
-                    }}
-                >
-                    Feel free to reach out to me for any questions or opportunities!
-                </Desc>
-                <ContactForm ref={form} onSubmit={handleSubmit}>
-                    <ContactTitle>Email Me 🚀</ContactTitle>
-                    <ContactInput placeholder="Your Email" name="from_email" />
-                    <ContactInput placeholder="Your Name" name="from_name" />
-                    <ContactInput placeholder="Subject" name="subject" />
-                    <ContactInputMessage placeholder="Message" name="message" rows={4} />
-                    <ContactButton type="submit" value="Send" />
-                </ContactForm>
-            </Wrapper>
-        </Container>
-    );
+  return (
+    <Container id="Education">
+      <Wrapper>
+        <Title>Contact</Title>
+        <Desc
+          style={{
+            marginBottom: "40px",
+          }}
+        >
+          Feel free to reach out to me for any questions or opportunities!
+        </Desc>
+        <ContactForm ref={form} onSubmit={handleSubmit}>
+          <ContactTitle>Email Me 🚀</ContactTitle>
+          <ContactInput placeholder="Your Email" name="from_email" />
+          <ContactInput placeholder="Your Name" name="from_name" />
+          <ContactInput placeholder="Subject" name="subject" />
+          <ContactInputMessage placeholder="Message" name="message" rows={4} />
+          <ContactButton type="submit" value="Send" />
+        </ContactForm>
+      </Wrapper>
+    </Container>
+  );
 };
 
 export default Contact;
