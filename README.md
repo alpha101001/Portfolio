@@ -1,2 +1,1 @@
-Work in progress.
-Not finished yet.
+Initial development done
