@@ -7,7 +7,11 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": true, // Add this line to allow JavaScript files
-    "checkJs": false // Add this line to disable type-checking for JavaScript files
+    "checkJs": false, // Add this line to disable type-checking for JavaScript files
+    "outDir": "./dist", // Output directory for compiled files
+    "rootDir": "./src", // Root directory for source files
+    "resolveJsonModule": true, // Enable importing .json files
+    "isolatedModules": true // For Vite and TypeScript to handle each file in isolation
   },
   "include": ["src/**/*"],
   "files": [],
