@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { bio as Bio } from "../../Data/Constant";
 import Typewriter from "typewriter-effect";
-import ProfilePic from "../../images/Avi.png";
+import ProfilePic from "../../assets/Avi.png";
 import ProfileAnimation from "../ProfileAnimation/ProfileAnimation";
 import { Tilt } from "react-tilt";
 import { motion } from "framer-motion";
