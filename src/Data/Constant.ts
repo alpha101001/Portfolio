@@ -237,7 +237,7 @@ export const experiences: Experience[] = [
     image: SNR,
     role: "Software Engineer",
     company: "Sense & Respond Software LLC",
-    date: "June 2024 - Present",
+    date: "June 2024 - December 2024",
     description:
       "Enhancing user experiences and developing skills while working at Sense & Respond Software LLC.",
     skills: ["React.js", "Redux Toolkit", "Material UI", "TypeScript", "API"],

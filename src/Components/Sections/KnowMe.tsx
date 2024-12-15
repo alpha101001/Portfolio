@@ -47,7 +47,7 @@ const TitleDiv = styled.div`
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 32px;
-  }    
+  }
 `;
 
 const AboutDiv = styled.div`
@@ -64,7 +64,7 @@ const KnowMe: React.FC = () => {
   return (
     <Container id="KnowMe">
       <Wrapper>
-        <TitleDiv>Know Me A Little</TitleDiv>
+        <TitleDiv>Know About Me</TitleDiv>
         <AboutDiv
           style={{
             marginLeft: "30px",
