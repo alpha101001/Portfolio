@@ -104,7 +104,7 @@ export const bio: Bio = {
     "I am a driven and adaptable individual, consistently eager to embrace new challenges. My passion for learning fuels my commitment to delivering high-quality results. With a positive attitude and a growth mindset, I am prepared to make a meaningful impact and achieve remarkable success.",
   github: "https://github.com/alpha101001",
   resume:
-    "https://drive.google.com/file/d/13wzTmpeVl-Ql5fZ2kPz26yS1jWL6WaGg/view?usp=sharing",
+    "https://avi-12.s3.us-east-1.amazonaws.com/Avishek_Roy.pdf",
   linkedin: "https://www.linkedin.com/in/avishek-roy-/",
   facebook: "https://www.facebook.com/king101001/",
 };
