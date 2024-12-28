@@ -10,7 +10,7 @@ import Education from '../Components/Sections/Education';
 import Contact from '../Components/Sections/Contact';
 import Footer from '../Components/Sections/Footer';
 import StartCanvas from "../Components/Canvas/Stars";
-import KnowMe from '../Components/Sections/KnowMe';
+// import KnowMe from '../Components/Sections/KnowMe';
 import ConferencePapers from '../Components/Sections/ConferencePaper';
 interface Theme {
     bg: string;
