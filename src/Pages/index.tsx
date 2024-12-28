@@ -58,7 +58,7 @@ const Portfolio: React.FC = () => {
 
                     <Wrapper>
                         <Education />
-                        <KnowMe />
+                        {/* <KnowMe /> */}
                         <Contact />
                     </Wrapper>
                     <Footer />

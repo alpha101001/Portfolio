@@ -45,13 +45,13 @@ const ProjectDetailsDiv = styled.div`
   gap: 0px;
   padding: 0px 2px;
   flex-grow: 1;
-  
+
 `;
 
 const Title = styled.div`
   font-size: 20px;
   font-weight: 600;
-  
+
   overflow: hidden;
   display: -webkit-box;
   max-width: 100%;
@@ -60,7 +60,7 @@ const Title = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   color: #00E5FF;
-  
+
 `;
 
 const WorkTimelineDiv = styled.div`
@@ -107,7 +107,7 @@ const Button = styled.a`
   font-weight: 600;
   text-align: center;
   &:hover {
-    color: #FFDD00; 
+    color: #FFDD00;
   }
 `;
 
@@ -119,16 +119,20 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       <ProjectDetailsDiv>
         <Title>{project.title}</Title>
         <WorkTimelineDiv>{project.date}</WorkTimelineDiv>
-        <ProjectDescriptionDiv>{project.description}</ProjectDescriptionDiv>
+        <ProjectDescriptionDiv title={project.description}>{project.description}</ProjectDescriptionDiv>
       </ProjectDetailsDiv>
       <Members>
         {project.members?.map((member, index) => (
           <Avatar key={index} src={member.image} alt="Member" />
         ))}
       </Members>
-      <Button href={project.github} target="_blank">
+
+     {project.isLive &&( <Button href={project.liveURL} target="_blank">
+        Live Demo
+      </Button>)}
+      {project.category==='Self' &&( <Button href={project.github} target="_blank">
         View Code
-      </Button>
+      </Button>)}
     </Card>
   );
 };

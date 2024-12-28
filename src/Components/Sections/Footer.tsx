@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
           <NavLink href="#Projects">Projects</NavLink>
           <NavLink href="#ConferencePapers">Publications</NavLink>
           <NavLink href="#Education">Education</NavLink>
-          <NavLink href="#KnowMe">KnowMe</NavLink>
+          {/* <NavLink href="#KnowMe">KnowMe</NavLink> */}
         </Nav>
         <SocialMediaIcons>
           <SocialMediaIcon href={Bio.facebook} target="display">

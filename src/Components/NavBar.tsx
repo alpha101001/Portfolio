@@ -153,12 +153,12 @@ const Navbar: React.FC = () => {
         </MobileIcon>
         <NavItems>
           <NavLink href="#About">About</NavLink>
-          <NavLink href="#Skills">Skills & Knowledges</NavLink>
+          <NavLink href="#Skills">Knowledge</NavLink>
           <NavLink href="#Experience">Experience</NavLink>
           <NavLink href="#Projects">Projects</NavLink>
           <NavLink href="#ConferencePapers">Publications</NavLink>
           <NavLink href="#Education">Education</NavLink>
-          <NavLink href="#KnowMe">Know Me</NavLink>
+          {/* <NavLink href="#KnowMe">Know Me</NavLink> */}
 
         </NavItems>
         {isOpen && (
@@ -181,9 +181,9 @@ const Navbar: React.FC = () => {
             <NavLink onClick={() => setIsOpen(!isOpen)} href="#Education" isOpen={isOpen}>
               Education
             </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#KnowMe" isOpen={isOpen}>
+            {/* <NavLink onClick={() => setIsOpen(!isOpen)} href="#KnowMe" isOpen={isOpen}>
               KnowMe
-            </NavLink>
+            </NavLink> */}
             <GithubButton
               href={Bio.github}
               target="_blank"

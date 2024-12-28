@@ -6,15 +6,21 @@ import BloggingSite from "../assets/BloggingSite.png";
 import DBMSProject from "../assets/DBMSProject.png";
 import KUETLogoVector from "../assets/KUETLogoVector.svg";
 import NotreDameCollegeDhaka from "../assets/NotreDameCollegeDhaka.svg";
+import AllThingAPI from "../assets/companyProject.png";
+import SmartNotes from "../assets/SmartNotes.png";
+import Portfolio from "../assets/Portfolio.png";
+import notAvailable from "../assets/notAvailable.png";
+import ExpressJs from "../assets/icons8-express-js.svg";
+
 import School from "../assets/School.png";
 import SNR from "../assets/SNR.png";
 import Typescript from "../assets/Typescript.svg";
-import Cpp from "../assets/cpp.svg";
-import CSharp from "../assets/CSharp.svg";
+// import Cpp from "../assets/cpp.svg";
+// import CSharp from "../assets/CSharp.svg";
 import Python from "../assets/Python.svg";
 import Solidity from "../assets/Solidity.svg";
-import SQL from "../assets/SQL.svg";
-import Database from "../assets/Database.svg";
+// import SQL from "../assets/SQL.svg";
+// import Database from "../assets/Database.svg";
 import SymmetricKeyCryptography from "../assets/SymmetricKeyCryptography.png";
 import AsymmetricKeyCryptography from "../assets/AsymmetricKeyCryptography.png";
 import HashFunctions from "../assets/HashFunctions.png";
@@ -84,6 +90,8 @@ export interface Project {
   webapp?: string;
   members?: ProjectMember[];
   paperLink?: string;
+  isLive?: boolean;
+  liveURL?: string;
 }
 
 export interface Timeline {
@@ -95,13 +103,14 @@ export const bio: Bio = {
   name: "Avishek Roy",
   roles: [
     "Software Engineer",
+    'Full Stack Enthusiast',
     "Blockchain Enthusiast",
     "Problem Solver",
     "Frontend Developer",
     "Programmer",
   ],
   description:
-    "I am a driven and adaptable individual, consistently eager to embrace new challenges. My passion for learning fuels my commitment to delivering high-quality results. With a positive attitude and a growth mindset, I am prepared to make a meaningful impact and achieve remarkable success.",
+    "I am an enthusiastic Full Stack Developer specializing in React, TypeScript, Redux, and Material UI, now expanding into backend engineering and AWS-based solutions. With Docker foundations and a passion for building secure, scalable systems, I merge front-end excellence with cloud readiness. Driven, adaptable, and fueled by a growth mindset, I embrace challenges, collaborate effectively, and consistently deliver high-quality results.",
   github: "https://github.com/alpha101001",
   resume:
     "https://avi-12.s3.us-east-1.amazonaws.com/Avishek_Roy.pdf",
@@ -111,7 +120,7 @@ export const bio: Bio = {
 
 export const skills: Skill[] = [
   {
-    title: "Frontend",
+    title: "Tech Stack",
     skills: [
       {
         name: "React.js",
@@ -129,6 +138,10 @@ export const skills: Skill[] = [
         name: "Material UI",
         image: MaterialUi,
       },
+      {
+        name: "Express.js",
+        image: ExpressJs,
+      },
     ],
   },
   {
@@ -138,14 +151,14 @@ export const skills: Skill[] = [
         name: "TypeScript",
         image: Typescript,
       },
-      {
-        name: "C++",
-        image: Cpp,
-      },
-      {
-        name: "C#",
-        image: CSharp,
-      },
+      // {
+      //   name: "C++",
+      //   image: Cpp,
+      // },
+      // {
+      //   name: "C#",
+      //   image: CSharp,
+      // },
       {
         name: "Python",
         image: Python,
@@ -154,23 +167,23 @@ export const skills: Skill[] = [
         name: "Solidity",
         image: Solidity,
       },
-      {
-        name: "SQL",
-        image: SQL,
-      },
+      // {
+      //   name: "SQL",
+      //   image: SQL,
+      // },
     ],
   },
+//   {
+//     title: "Database Knowledge",
+//     skills: [
+//       {
+//         name: "Database Management System",
+//         image: Database,
+//       },
+//     ],
+//   },
   {
-    title: "Database Knowledge",
-    skills: [
-      {
-        name: "Database Management System",
-        image: Database,
-      },
-    ],
-  },
-  {
-    title: "Practical Experience in Operating Systems",
+    title: "Practical Knowledge in Operating Systems",
     skills: [
       {
         name: "Microsoft Windows",
@@ -235,7 +248,7 @@ export const experiences: Experience[] = [
   {
     id: 0,
     image: SNR,
-    role: "Software Engineer",
+    role: "Software Engineer Trainee",
     company: "Sense & Respond Software LLC",
     date: "June 2024 - December 2024",
     description:
@@ -281,31 +294,91 @@ export const education: Education[] = [
 ];
 
 export const projects: Project[] = [
+   {
+      id: 0,
+      title: "Smart Notes",
+      date: "December 2024",
+      description:
+        "A responsive note-taking app built with React.js, Material UI, and Redux Toolkit, offering a smooth user experience for creating and editing notes.",
+      image: SmartNotes,
+      tags: ["Full-Stack Application"],
+      category: "Self",
+      github: "https://github.com/alpha101001/SmartNotes-frontend",
+      webapp: "https://github.com/alpha101001/SmartNotes-frontend",
+      isLive: true,
+      liveURL:"https://smart-notes-five.vercel.app/",
+    },
+    {
+      id: 1,
+      title: "Smart Notes Backend",
+      date: "December 2024",
+      description:
+        "Backend for a note-taking app, developed using Express.js to ensure efficient data management and seamless functionality.",
+      image: notAvailable,
+      tags: ["Full-Stack Application"],
+      category: "Self",
+      github: "https://github.com/alpha101001/SmartNotes-backend",
+      webapp: "https://github.com/alpha101001/SmartNotes-backend",
+      isLive: false,
+      liveURL:"https://smart-notes-five.vercel.app/",
+    },
+    {
+      id: 2,
+      title: "All Thing API",
+      date: "",
+      description:
+        "In the employment of my previous job, I worked on this project.In here, I fixed all ESLint errors across the codebase, ensuring consistent coding standards and maintainability with TypeScript, integrated i18n to implement multi-language support and resolved critical UI/functional bugs for improved user experience. Developed reusable React with Material UI components and implemented role-based authentication in key application modules.",
+      image: AllThingAPI,
+      tags: ["React.js", "TypeScript", "Material UI","Redux Toolkit","API","Git"],
+      category: "Company",
+      github: "",
+      webapp: "",
+      isLive: true,
+      liveURL:"https://dev.web.apitestsuite.com/",
+    },
+    {
+      id: 3,
+      title: "Portfolio",
+      date: "September 2024",
+      description:
+        "A personal portfolio website showcasing my skills, projects, and experiences. Built with React.js, Material UI, and Three.js, it offers a visually appealing and interactive experience for visitors.",
+      image: Portfolio,
+      tags: ["Front-End"],
+      category: "Self",
+      github: "https://github.com/alpha101001/Portfolio",
+      webapp: "https://github.com/alpha101001/Portfolio",
+      isLive: true,
+      liveURL:"https://alpha101001.github.io/Portfolio/",
+    },
   {
-    id: 0,
+    id: 4,
     title: "DBMS Project",
     date: "March 2022 - April 2022",
     description:
       "A comprehensive database project showcasing the versatility of SQL through a wide array of examples, demonstrating everything from basic queries to complex data manipulation and analytics techniques.",
     image: DBMSProject,
     tags: ["SQL"],
-    category: "Terminal Project",
+    category: "Self",
     github: "https://github.com/alpha101001/DBMS_Project",
     webapp: "https://github.com/alpha101001/DBMS_Project",
+    isLive: false,
+    liveURL:"",
   },
   {
-    id: 1,
+    id: 5,
     title: "Blogging-Site",
     date: "April 2022 - May 2022",
     description:
       "A dynamic and user-friendly blogging platform designed for everyday bloggers. Built with ASP.NET and a MySQL database, offering a seamless experience for sharing and exploring a diverse range of blog posts.",
     image: BloggingSite,
     tags: ["C#     ", "MySQL     ", "ASP.NET     "],
-    category: "Web app",
+    category: "Self",
     github:
       "https://github.com/alpha101001/Blogging-Site-Web-Project---ASP.NET-",
     webapp:
       "https://github.com/alpha101001/Blogging-Site-Web-Project---ASP.NET-",
+      isLive: false,
+      liveURL:"",
   },
 
   // Add other projects similarly
@@ -348,19 +421,19 @@ export const conferencePapers: Project[] = [
 ];
 
 export const timelineData: Timeline[] = [
-  { year: 2014, text: "Started my journey of learning." },
-  {
-    year: 2016,
-    text: "Phase changed and started college education at Notre Dame College, where I learned about psychological aspects of life alongside my HSC education.",
-  },
-  {
-    year: 2018,
-    text: "Another phase change occurred, and I started my undergraduate studies at KUET, going through a challenging period for 3 years alongside my BSc in CSE.",
-  },
-  { year: 2022, text: "Returned to my passion for the pursuit of knowledge." },
-  { year: 2023, text: "Achieved 3 conference papers related to my thesis." },
-  {
-    year: 2024,
-    text: "Entered a new phase and began my journey as a Software Engineer at Sense & Respond Software LLC.",
-  },
+
+//   {
+//     year: 2016,
+//     text: "Started Higher Secondary education at Notre Dame College.",
+//   },
+//   {
+//     year: 2018,
+//     text: "Another phase change occurred, and I started my undergraduate studies at KUET, going through a challenging period for 3 years alongside my BSc in CSE.",
+//   },
+//   { year: 2022, text: "Returned to my passion for the pursuit of knowledge." },
+//   { year: 2023, text: "Achieved 3 conference papers related to my thesis." },
+//   {
+//     year: 2024,
+//     text: "Entered a new phase and began my journey as a Software Engineer at Sense & Respond Software LLC.",
+//   },
 ];

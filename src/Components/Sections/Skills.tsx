@@ -17,7 +17,7 @@ const ContainerDiv = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
-  
+
 `;
 
 const WrapperDiv = styled.div`
@@ -32,8 +32,8 @@ const WrapperDiv = styled.div`
   @media (max-width: 960px) {
     flex-direction: column;
   }
-  
-    
+
+
 `;
 
 const TitleDiv = styled.div`
@@ -46,7 +46,7 @@ const TitleDiv = styled.div`
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 32px;
-  } 
+  }
 `;
 
 const DescriptionDiv = styled.div`
@@ -57,7 +57,7 @@ const DescriptionDiv = styled.div`
   @media (max-width: 768px) {
     font-size: 16px;
   }
-    
+
 `;
 
 const SkillsContainerDiv = styled.div`
@@ -67,7 +67,7 @@ const SkillsContainerDiv = styled.div`
   margin-top: 20px;
   gap: 50px;
   justify-content: center;
-  
+
 `;
 
 const SkillDiv = styled.div`
@@ -87,7 +87,7 @@ const SkillDiv = styled.div`
     max-width: 330px;
     padding: 10px 36px;
   }
-    
+
 `;
 
 const SkillTitle = styled.div`
@@ -104,7 +104,7 @@ const SkillList = styled.div`
   flex-wrap: wrap;
   gap: 12px;
   margin-bottom: 20px;
-  
+
 `;
 
 const SkillItem = styled.div`
@@ -139,7 +139,7 @@ const Skills: React.FC = () => {
   return (
     <ContainerDiv id="Skills">
       <WrapperDiv>
-        <TitleDiv>Skills & Knowledges</TitleDiv>
+        <TitleDiv>Knowledge</TitleDiv>
         <DescriptionDiv
           style={{
             marginBottom: "40px",

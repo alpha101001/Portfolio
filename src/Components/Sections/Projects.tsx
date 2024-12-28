@@ -20,8 +20,8 @@ const ParentContainerDiv = styled.div`
   position: relative;
   z-index: 1;
   align-items: center;
-  
-  
+
+
 `;
 
 const ChildContainerDiv = styled.div`
@@ -36,8 +36,8 @@ const ChildContainerDiv = styled.div`
   @media (max-width: 960px) {
     flex-direction: column;
   }
-  
-    
+
+
 `;
 
 const TitleDiv = styled.div`
@@ -50,8 +50,8 @@ const TitleDiv = styled.div`
   @media (max-width: 768px) {
     margin-top: 12px;
     font-size: 32px;
-  }    
-    
+  }
+
 `;
 
 const ProjectDescriptionDiv = styled.div`
@@ -62,7 +62,7 @@ const ProjectDescriptionDiv = styled.div`
   @media (max-width: 768px) {
     font-size: 16px;
   }
-    
+
 `;
 
 const ToggleButtonGroup = styled.div`
@@ -83,10 +83,10 @@ const ToggleButton = styled.div<{ $active: boolean }>`
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   background: ${({ $active }) => ($active ? '#5F26AD' : 'transparent')};
-  color: ${({ $active }) => ($active ? '#ffffff' : '#a259ff')}; 
-  
+  color: ${({ $active }) => ($active ? '#ffffff' : '#a259ff')};
+
   &:hover {
-    background: ${({ $active }) => ($active ? '#a259ff' : '#6a0dad')}; 
+    background: ${({ $active }) => ($active ? '#a259ff' : '#6a0dad')};
     color: #ffffff; /* White on hover */
   }
 
@@ -133,17 +133,17 @@ const Projects: React.FC = () => {
           </ToggleButton>
           <Divider />
           <ToggleButton
-            $active={toggle === "Web app"}
-            onClick={() => setToggle("Web app")}
+            $active={toggle === "Self"}
+            onClick={() => setToggle("Self")}
           >
-            Web App
+            Personal Projects
           </ToggleButton>
           <Divider />
           <ToggleButton
-            $active={toggle === "Terminal Project"}
-            onClick={() => setToggle("Terminal Project")}
+            $active={toggle === "Company"}
+            onClick={() => setToggle("Company")}
           >
-            Terminal Project
+            Projects Worked on previous Company
           </ToggleButton>
           <Divider />
 
