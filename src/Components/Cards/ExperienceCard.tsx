@@ -7,7 +7,7 @@ const ContentCardTopSectionDiv = styled.div`
   display: flex;
   max-width: 100%;
   gap: 12px;
-  
+
 `;
 
 const Image = styled.img`
@@ -23,7 +23,7 @@ const TopSectionBodyDiv = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  
+
 `;
 
 const RoleInWorkPlaceDiv = styled.div`
@@ -93,6 +93,7 @@ const SkillSectionChildDiv = styled.div`
 `;
 
 interface Experience {
+   id: number;
   image: string;
   company: string;
   role: string;
@@ -106,6 +107,22 @@ interface ExperienceCardProps {
 }
 
 const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
+   const handleImageSize = (id: number) => {
+      switch (id) {
+         case 0:
+         return { width: "50px", height: "50px" };
+         case 1:
+         return { width: "100px", height: "50px" };
+         case 2:
+         return { width: "50px", height: "80px" };
+         case 3:
+         return { width: "70px", height: "70px" };
+         case 4:
+         return { width: "80px", height: "80px" };
+         default:
+         return { width: "50px", height: "50px" };
+      }
+   }
   return (
     <VerticalTimelineElement
 
@@ -126,7 +143,10 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
       date={experience?.date}
     >
       <ContentCardTopSectionDiv>
-        <Image src={experience?.image} />
+        <Image src={experience?.image} style={
+         handleImageSize(experience?.id)
+
+         } />
         <TopSectionBodyDiv>
           <RoleInWorkPlaceDiv>{experience?.role}</RoleInWorkPlaceDiv>
           <CompanyNameDiv>{experience?.company}</CompanyNameDiv>
@@ -134,7 +154,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({ experience }) => {
         </TopSectionBodyDiv>
       </ContentCardTopSectionDiv>
       <CompanyDescription>
-        {experience?.description && <Span>{experience.description}</Span>}
+        {experience?.description && <Span>{experience?.description}</Span>}
         {experience?.skills && (
           <>
             <br />
