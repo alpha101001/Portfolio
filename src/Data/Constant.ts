@@ -14,6 +14,7 @@ import ExpressJs from "../assets/icons8-express-js.svg";
 
 import School from "../assets/School.png";
 import SNR from "../assets/SNR.png";
+import LYNORG from "../assets/LYNORG.png";
 import Typescript from "../assets/Typescript.svg";
 // import Cpp from "../assets/cpp.svg";
 // import CSharp from "../assets/CSharp.svg";
@@ -142,6 +143,18 @@ export const skills: Skill[] = [
         name: "Express.js",
         image: ExpressJs,
       },
+      {
+        name: "Ant Design",
+      //   image: ExpressJs,
+      },
+      {
+        name: "Node.js",
+      //   image: ExpressJs,
+      },
+       {
+        name: "R&D",
+      //   image: ExpressJs,
+      },
     ],
   },
   {
@@ -159,10 +172,10 @@ export const skills: Skill[] = [
       //   name: "C#",
       //   image: CSharp,
       // },
-      {
-        name: "Python",
-        image: Python,
-      },
+      // {
+      //   name: "Python",
+      //   image: Python,
+      // },
       {
         name: "Solidity",
         image: Solidity,
@@ -248,12 +261,22 @@ export const experiences: Experience[] = [
   {
     id: 0,
     image: SNR,
-    role: "Software Engineer Trainee",
+    role: "Software Engineer",
     company: "Sense & Respond Software LLC",
     date: "June 2024 - December 2024",
     description:
-      "Enhancing user experiences and developing skills while working at Sense & Respond Software LLC.",
-    skills: ["React.js", "Redux Toolkit", "Material UI", "TypeScript", "API"],
+      "Contributed to the development of 'All Things API', a comprehensive remote company management system that  provides a remote workplace operations and communication.",
+    skills: ["React.js", "Redux Toolkit", "Material UI", "TypeScript", "API Integration"],
+  },
+  {
+    id: 1,
+    image: LYNORG,
+    role: "Software Engineer",
+    company: "LynOrg Technologies Limited",
+    date: "January 2025 - Present",
+    description:
+      "Working on multiple ERP solution projects, implementing business systems with integrated functionalities for enterprise resource planning and management.",
+    skills: ["React.js", "Redux Toolkit", "Ant Design", "JavaScript", "API Integration"],
   },
 
   // Add other experiences similarly
