@@ -18,7 +18,7 @@ import LYNORG from "../assets/LYNORG.png";
 import Typescript from "../assets/Typescript.svg";
 // import Cpp from "../assets/cpp.svg";
 // import CSharp from "../assets/CSharp.svg";
-import Python from "../assets/Python.svg";
+// import Python from "../assets/Python.svg";
 import Solidity from "../assets/Solidity.svg";
 // import SQL from "../assets/SQL.svg";
 // import Database from "../assets/Database.svg";
