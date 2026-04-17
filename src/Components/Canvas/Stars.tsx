@@ -1,4 +1,4 @@
-import React, { useRef, useState, Suspense } from "react";
+import React, { useRef, useState, Suspense, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Points, PointMaterial, Preload } from "@react-three/drei";
 import * as random from "maath/random";
@@ -15,8 +15,27 @@ const CanvasWrapperDiv = styled.div`
 const Stars: React.FC = (props) => {
     const ref = useRef<THREE.Points>(null);
     const [sphere] = useState(() =>
-        random.inSphere(new Float32Array(4000), { radius: 1.2 })
+        random.inSphere(new Float32Array(5000), { radius: 1.2 })
     );
+
+    // Circular alpha texture so points render as circles, not squares/ovals
+    const circleTexture = useMemo(() => {
+        const size = 64;
+        const canvas = document.createElement("canvas");
+        canvas.width = size;
+        canvas.height = size;
+        const ctx = canvas.getContext("2d")!;
+        const gradient = ctx.createRadialGradient(
+            size / 2, size / 2, 0,
+            size / 2, size / 2, size / 2
+        );
+        gradient.addColorStop(0, "rgba(255,255,255,1)");
+        gradient.addColorStop(0.4, "rgba(255,255,255,0.8)");
+        gradient.addColorStop(1, "rgba(255,255,255,0)");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, size, size);
+        return new THREE.CanvasTexture(canvas);
+    }, []);
 
     useFrame((_, delta) => {
         if (ref.current) {
@@ -31,9 +50,12 @@ const Stars: React.FC = (props) => {
                 <PointMaterial
                     transparent
                     color="#07bbf7"
-                    size={0.002}
+                    map={circleTexture}
+                    size={0.005}
                     sizeAttenuation={true}
                     depthWrite={false}
+                    alphaTest={0.01}
+                    vertexColors={false}
                 />
             </Points>
         </group>
@@ -43,7 +65,11 @@ const Stars: React.FC = (props) => {
 const StyledStarsCanvas: React.FC = () => {
     return (
         <CanvasWrapperDiv>
-            <Canvas camera={{ position: [0, 0, 1] }} dpr={[1, 2]} gl={{ antialias: true }}>
+            <Canvas
+                camera={{ position: [0, 0, 1] }}
+                dpr={[1, 2]}
+                gl={{ antialias: true, alpha: true }}
+            >
                 <Suspense fallback={null}>
                     <Stars />
                 </Suspense>

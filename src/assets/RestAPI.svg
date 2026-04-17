@@ -1,0 +1,5 @@
+<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="24" height="24" rx="4" fill="#00C7B7"/>
+  <text x="12" y="10" font-family="monospace" font-size="5.5" font-weight="bold" fill="white" text-anchor="middle">REST</text>
+  <text x="12" y="17" font-family="monospace" font-size="5" fill="white" text-anchor="middle">API</text>
+</svg>

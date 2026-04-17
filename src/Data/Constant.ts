@@ -36,6 +36,15 @@ import AntDesign from "../assets/AntDesign.svg";
 import GithubActions from "../assets/GithubActions.svg";
 import AWS from "../assets/AWS.svg";
 import ShadhinMusic from "../assets/ShadhinMusic.svg";
+import LeetCode from "../assets/LeetCode.svg";
+import TryHackMe from "../assets/TryHackMe.svg";
+import Ethereum from "../assets/Ethereum.svg";
+import SocketIO from "../assets/SocketIO.svg";
+import RestAPI from "../assets/RestAPI.svg";
+import AuthLock from "../assets/AuthLock.svg";
+import Performance from "../assets/Performance.svg";
+import SystemDesign from "../assets/SystemDesign.svg";
+import Scalability from "../assets/Scalability.svg";
 
 interface Bio {
   name: string;
@@ -161,11 +170,11 @@ export const skills: Skill[] = [
   {
     title: "Systems Architecture & Integration",
     skills: [
-      { name: "REST API Architecture" },
-      { name: "Authentication & Authorization" },
-      { name: "WebSockets" },
-      { name: "System Design" },
-      { name: "Scalability Validation" },
+      { name: "REST API Architecture", image: RestAPI },
+      { name: "Authentication & Authorization", image: AuthLock },
+      { name: "WebSockets", image: SocketIO },
+      { name: "System Design", image: SystemDesign },
+      { name: "Scalability Validation", image: Scalability },
     ],
   },
   {
@@ -183,10 +192,10 @@ export const skills: Skill[] = [
   {
     title: "Core Engineering & Security",
     skills: [
-      { name: "Data Structures & Algorithms" },
-      { name: "Cybersecurity Principles" },
-      { name: "Performance Optimization" },
-      { name: "Blockchain Principles" },
+      { name: "Data Structures & Algorithms", image: LeetCode },
+      { name: "Cybersecurity Principles", image: TryHackMe },
+      { name: "Performance Optimization", image: Performance },
+      { name: "Blockchain Principles", image: Ethereum },
     ],
   },
   {
