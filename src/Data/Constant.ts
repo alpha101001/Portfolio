@@ -1,6 +1,5 @@
 import ReactIcon from "../assets/ReactIcon.svg";
 import ReduxIcon from "../assets/ReduxIcon.svg";
-import ThreeIcon from "../assets/ThreeIcon.svg";
 import MaterialUi from "../assets/MaterialUI.svg";
 import BloggingSite from "../assets/BloggingSite.png";
 import DBMSProject from "../assets/DBMSProject.png";
@@ -10,30 +9,15 @@ import AllThingAPI from "../assets/companyProject.png";
 import SmartNotes from "../assets/SmartNotes.png";
 import Portfolio from "../assets/Portfolio.png";
 import notAvailable from "../assets/notAvailable.png";
-import ExpressJs from "../assets/icons8-express-js.svg";
-
 import School from "../assets/School.png";
 import SNR from "../assets/SNR.png";
 import LYNORG from "../assets/LYNORG.png";
 import Typescript from "../assets/Typescript.svg";
-// import Cpp from "../assets/cpp.svg";
-// import CSharp from "../assets/CSharp.svg";
-// import Python from "../assets/Python.svg";
-import Solidity from "../assets/Solidity.svg";
-// import SQL from "../assets/SQL.svg";
-// import Database from "../assets/Database.svg";
-import SymmetricKeyCryptography from "../assets/SymmetricKeyCryptography.png";
-import AsymmetricKeyCryptography from "../assets/AsymmetricKeyCryptography.png";
-import HashFunctions from "../assets/HashFunctions.png";
-import DigitalSignatures from "../assets/DigitalSignatures.png";
-import BlockchainCryptography from "../assets/BlockchainCryptography.png";
-import KeyManagement from "../assets/KeyManagement.png";
-import ZeroKnowledgeProofs from "../assets/ZeroKnowledgeProof.svg";
-import ECC from "../assets/ECC.svg";
 import WindowsOS from "../assets/WindowsOS.svg";
 import ParrotOS from "../assets/ParrotOS.png";
 import KaliLinuxOS from "../assets/KaliLinuxOS.svg";
 import FedoraOS from "../assets/FedoraOS.svg";
+
 interface Bio {
   name: string;
   roles: string[];
@@ -104,155 +88,95 @@ export const bio: Bio = {
   name: "Avishek Roy",
   roles: [
     "Software Engineer",
-    'Full Stack Enthusiast',
-    "Blockchain Enthusiast",
+    "AI-Assisted Engineer",
+    "Full Stack Developer",
+    "Cybersecurity Enthusiast",
     "Problem Solver",
-    "Frontend Developer",
     "Programmer",
   ],
   description:
-    "I am an enthusiastic Full Stack Developer specializing in React, TypeScript, Redux, and Material UI, now expanding into backend engineering and AWS-based solutions. With Docker foundations and a passion for building secure, scalable systems, I merge front-end excellence with cloud readiness. Driven, adaptable, and fueled by a growth mindset, I embrace challenges, collaborate effectively, and consistently deliver high-quality results.",
+    "System-driven Software Engineer with a strong foundation in backend architecture, security, and full-stack development. Actively leveraging AI tools, Agent Skills, and Prompt Engineering as primary development engines to architect scalable SaaS systems and accelerate the SDLC. Combines rigorous cybersecurity knowledge (CTFs, TryHackMe) with deep systems thinking to perform AI-assisted security audits and build robust, production-ready software.",
   github: "https://github.com/alpha101001",
-  resume:
-    "https://avi-12.s3.us-east-1.amazonaws.com/Avishek_Roy.pdf",
+  resume: "https://avi-12.s3.us-east-1.amazonaws.com/Avishek_Roy.pdf",
   linkedin: "https://www.linkedin.com/in/avishek-roy-/",
   facebook: "https://www.facebook.com/king101001/",
 };
 
 export const skills: Skill[] = [
   {
-    title: "Tech Stack",
+    title: "AI & Agentic Engineering",
     skills: [
-      {
-        name: "React.js",
-        image: ReactIcon,
-      },
-      {
-        name: "Redux Toolkit",
-        image: ReduxIcon,
-      },
-      {
-        name: "Three.js",
-        image: ThreeIcon,
-      },
-      {
-        name: "Material UI",
-        image: MaterialUi,
-      },
-      {
-        name: "Express.js",
-        image: ExpressJs,
-      },
-      {
-        name: "Ant Design",
-      //   image: ExpressJs,
-      },
-      {
-        name: "Node.js",
-      //   image: ExpressJs,
-      },
-       {
-        name: "R&D",
-      //   image: ExpressJs,
-      },
+      { name: "Antigravity" },
+      { name: "Cursor" },
+      { name: "Claude Code" },
+      { name: "Gemini CLI" },
+      { name: "Agent Skills" },
+      { name: "MCP Tools" },
+      { name: "Prompt Engineering" },
+      { name: "AI SDLC Management" },
+    ],
+  },
+  {
+    title: "Frameworks & Libraries",
+    skills: [
+      { name: "Next.js" },
+      { name: "React.js", image: ReactIcon },
+      { name: "Redux Toolkit", image: ReduxIcon },
+      { name: "Zustand" },
+      { name: "Tailwind CSS" },
+      { name: "Node.js" },
+      { name: "Ant Design" },
+      { name: "Material UI", image: MaterialUi },
     ],
   },
   {
     title: "Programming Languages",
     skills: [
-      {
-        name: "TypeScript",
-        image: Typescript,
-      },
-      // {
-      //   name: "C++",
-      //   image: Cpp,
-      // },
-      // {
-      //   name: "C#",
-      //   image: CSharp,
-      // },
-      // {
-      //   name: "Python",
-      //   image: Python,
-      // },
-      {
-        name: "Solidity",
-        image: Solidity,
-      },
-      // {
-      //   name: "SQL",
-      //   image: SQL,
-      // },
+      { name: "TypeScript", image: Typescript },
+      { name: "JavaScript (ES6+)" },
+      { name: "Go (Golang)" },
+      { name: "C++" },
+      { name: "SQL" },
     ],
   },
-//   {
-//     title: "Database Knowledge",
-//     skills: [
-//       {
-//         name: "Database Management System",
-//         image: Database,
-//       },
-//     ],
-//   },
+  {
+    title: "Systems Architecture & Integration",
+    skills: [
+      { name: "REST API Architecture" },
+      { name: "Authentication & Authorization" },
+      { name: "WebSockets" },
+      { name: "System Design" },
+      { name: "Scalability Validation" },
+    ],
+  },
+  {
+    title: "Databases, DevOps & Infrastructure",
+    skills: [
+      { name: "PostgreSQL" },
+      { name: "MongoDB" },
+      { name: "Docker" },
+      { name: "CI/CD Pipelines" },
+      { name: "AWS (Basic)" },
+      { name: "Linux" },
+      { name: "Git" },
+    ],
+  },
+  {
+    title: "Core Engineering & Security",
+    skills: [
+      { name: "Data Structures & Algorithms" },
+      { name: "Cybersecurity Principles" },
+      { name: "Performance Optimization" },
+      { name: "Blockchain Principles" },
+    ],
+  },
   {
     title: "Practical Knowledge in Operating Systems",
     skills: [
-      {
-        name: "Microsoft Windows",
-        image: WindowsOS,
-      },
-      {
-        name: "Parrot Security OS",
-        image: ParrotOS,
-      },
-      {
-        name: "Fedora Linux",
-        image: FedoraOS,
-      },
-      {
-        name: "Kali Linux",
-        image: KaliLinuxOS,
-      },
-    ],
-  },
-  {
-    title: "Cryptography Knowledge",
-    skills: [
-      {
-        name: "Symmetric Key Cryptography",
-        image: SymmetricKeyCryptography, // Replace with appropriate image asset
-      },
-      {
-        name: "Asymmetric Key Cryptography",
-        image: AsymmetricKeyCryptography, // Replace with appropriate image asset
-      },
-      {
-        name: "Hash Functions",
-        image: HashFunctions, // Replace with appropriate image asset
-      },
-
-      {
-        name: "Digital Signatures",
-        image: DigitalSignatures, // Replace with appropriate image asset
-      },
-      {
-        name: "Blockchain Cryptography",
-        image: BlockchainCryptography, // Replace with appropriate image asset
-      },
-      {
-        name: "Key Management",
-        image: KeyManagement, // Replace with appropriate image asset
-      },
-      {
-        name: "Elliptic Curve Cryptography (ECC)",
-        image: ECC, // Replace with appropriate image asset
-      },
-
-      {
-        name: "Zero-Knowledge Proofs",
-        image: ZeroKnowledgeProofs, // Replace with appropriate image asset
-      },
+      { name: "Microsoft Windows", image: WindowsOS },
+      { name: "Parrot Security OS", image: ParrotOS },
+      { name: "Fedora Linux", image: FedoraOS },
+      { name: "Kali Linux", image: KaliLinuxOS },
     ],
   },
 ];
@@ -260,26 +184,44 @@ export const skills: Skill[] = [
 export const experiences: Experience[] = [
   {
     id: 0,
-    image: SNR,
+    image: notAvailable,
     role: "Software Engineer",
-    company: "Sense & Respond Software LLC",
-    date: "June 2024 - December 2024",
+    company: "Shadhin Music",
+    date: "August 2025 - Present",
     description:
-      "Contributed to the development of 'All Things API', a comprehensive remote company management system that  provides a remote workplace operations and communication.",
-    skills: ["React.js", "Redux Toolkit", "Material UI", "TypeScript", "API Integration"],
+      "Architected and engineered a high-performance Next.js application, utilizing AI-assisted workflows to boost Google Lighthouse scores from 42 to 85. Managed the SDLC for organic growth features, driving a large increase in SEO visibility by elevating discoverable pages from 2 to over 500 through dynamic rendering systems. Built secure, responsive interfaces with Zustand state management, integrating frontend components with backend APIs.",
+    skills: ["Next.js", "JavaScript", "Tailwind CSS", "Zustand", "SEO", "AI-Assisted Development"],
   },
   {
     id: 1,
     image: LYNORG,
     role: "Software Engineer",
     company: "LynOrg Technologies Limited",
-    date: "January 2025 - Present",
+    date: "January 2025 - July 2025",
     description:
-      "Working on multiple ERP solution projects, implementing business systems with integrated functionalities for enterprise resource planning and management.",
-    skills: ["React.js", "Redux Toolkit", "Ant Design", "JavaScript", "API Integration"],
+      "Developed complex, data-driven system interfaces for enterprise ERP solutions using React, TypeScript, and Ant Design. Architected real-time data synchronization features using WebSockets, optimizing application performance and component tree rendering for massive datasets. Collaborated with backend engineers to design, integrate, and test robust REST APIs.",
+    skills: ["React.js", "TypeScript", "Ant Design", "WebSockets", "Redux Toolkit", "API Integration"],
   },
-
-  // Add other experiences similarly
+  {
+    id: 2,
+    image: SNR,
+    role: "Software Engineer",
+    company: "Sense & Respond Software LLC",
+    date: "June 2024 - December 2024",
+    description:
+      "Built and maintained scalable React applications with TypeScript, establishing rigorous code standardization and security practices (ESLint) that significantly reduced production bugs. Optimized application architecture, loading times, and responsiveness through advanced code-splitting strategies and AI-assisted debugging workflows.",
+    skills: ["React.js", "TypeScript", "Material UI", "Redux Toolkit", "ESLint", "API Integration"],
+  },
+  {
+    id: 3,
+    image: notAvailable,
+    role: "Frontend Developer",
+    company: "Freelance (Remote, USA)",
+    date: "June 2022 - May 2024",
+    description:
+      "Managed the complete SDLC for individual clients, translating business requirements into scalable, secure web applications. Designed custom component architectures, implemented secure client-side features, and performed extensive debugging to ensure maintainability.",
+    skills: ["React.js", "JavaScript", "HTML/CSS", "SDLC Management"],
+  },
 ];
 
 export const education: Education[] = [
@@ -287,7 +229,7 @@ export const education: Education[] = [
     id: 0,
     image: KUETLogoVector,
     school: "Khulna University of Engineering & Technology, Khulna",
-    date: "2018 - 2023",
+    date: "2019 - 2024",
     grade: "CGPA 2.91",
     description:
       "I earned a Bachelor's degree in Computer Science and Engineering.",
@@ -313,68 +255,89 @@ export const education: Education[] = [
       "I completed my secondary education at Seroil Govt. High School, Rajshahi, where I studied Science.",
     degree: "Secondary School Certificate - SSC, Science",
   },
-  // Add other education similarly
 ];
 
 export const projects: Project[] = [
-   {
-      id: 0,
-      title: "Smart Notes",
-      date: "December 2024",
-      description:
-        "A responsive note-taking app built with React.js, Material UI, and Redux Toolkit, offering a smooth user experience for creating and editing notes.",
-      image: SmartNotes,
-      tags: ["Full-Stack Application"],
-      category: "Self",
-      github: "https://github.com/alpha101001/SmartNotes-frontend",
-      webapp: "https://github.com/alpha101001/SmartNotes-frontend",
-      isLive: true,
-      liveURL:"https://smart-notes-five.vercel.app/",
-    },
-    {
-      id: 1,
-      title: "Smart Notes Backend",
-      date: "December 2024",
-      description:
-        "Backend for a note-taking app, developed using Express.js to ensure efficient data management and seamless functionality.",
-      image: notAvailable,
-      tags: ["Full-Stack Application"],
-      category: "Self",
-      github: "https://github.com/alpha101001/SmartNotes-backend",
-      webapp: "https://github.com/alpha101001/SmartNotes-backend",
-      isLive: false,
-      liveURL:"https://smart-notes-five.vercel.app/",
-    },
-    {
-      id: 2,
-      title: "All Thing API",
-      date: "",
-      description:
-        "In the employment of my previous job, I worked on this project.In here, I fixed all ESLint errors across the codebase, ensuring consistent coding standards and maintainability with TypeScript, integrated i18n to implement multi-language support and resolved critical UI/functional bugs for improved user experience. Developed reusable React with Material UI components and implemented role-based authentication in key application modules.",
-      image: AllThingAPI,
-      tags: ["React.js", "TypeScript", "Material UI","Redux Toolkit","API","Git"],
-      category: "Company",
-      github: "",
-      webapp: "",
-      isLive: true,
-      liveURL:"https://dev.web.apitestsuite.com/",
-    },
-    {
-      id: 3,
-      title: "Portfolio",
-      date: "September 2024",
-      description:
-        "A personal portfolio website showcasing my skills, projects, and experiences. Built with React.js, Material UI, and Three.js, it offers a visually appealing and interactive experience for visitors.",
-      image: Portfolio,
-      tags: ["Front-End"],
-      category: "Self",
-      github: "https://github.com/alpha101001/Portfolio",
-      webapp: "https://github.com/alpha101001/Portfolio",
-      isLive: true,
-      liveURL:"https://alpha101001.github.io/Portfolio/",
-    },
+  {
+    id: 0,
+    title: "Shadhin Music – Performance & SEO Overhaul",
+    date: "August 2025 - Present",
+    description:
+      "Engineered a performance and SEO overhaul of a Next.js music platform, boosting the Google Lighthouse score from 42 to 85 and increasing discoverable pages from 2 to over 500 through dynamic rendering systems and AI-assisted workflows.",
+    image: notAvailable,
+    tags: ["Next.js", "JavaScript", "Tailwind CSS", "Zustand"],
+    category: "Company",
+    isLive: false,
+    liveURL: "",
+  },
+  {
+    id: 1,
+    title: "UI for Lynorg Workflow – Real-Time ERP Interface",
+    date: "January 2025 - July 2025",
+    description:
+      "Built a complex, real-time ERP interface with WebSockets for enterprise resource planning. Utilized advanced optimizations like debouncing and code-splitting to ensure high performance with massive datasets.",
+    image: notAvailable,
+    tags: ["React", "JavaScript", "Ant Design", "Material UI", "Redux", "WebSockets"],
+    category: "Company",
+    isLive: false,
+    liveURL: "",
+  },
+  {
+    id: 2,
+    title: "All Things API – Codebase Modernization",
+    date: "",
+    description:
+      "Modernized a legacy remote company management codebase by implementing code standardization (ESLint) to reduce bugs, building a reusable component library, and adding internationalization support. Implemented role-based authentication in key application modules.",
+    image: AllThingAPI,
+    tags: ["React.js", "TypeScript", "Material UI", "Redux Toolkit", "API", "Git"],
+    category: "Company",
+    isLive: true,
+    liveURL: "https://dev.web.apitestsuite.com/",
+  },
+  {
+    id: 3,
+    title: "Smart Notes",
+    date: "December 2024",
+    description:
+      "A responsive note-taking app built with React.js, Material UI, and Redux Toolkit, offering a smooth user experience for creating and editing notes.",
+    image: SmartNotes,
+    tags: ["Full-Stack Application"],
+    category: "Self",
+    github: "https://github.com/alpha101001/SmartNotes-frontend",
+    webapp: "https://github.com/alpha101001/SmartNotes-frontend",
+    isLive: true,
+    liveURL: "https://smart-notes-five.vercel.app/",
+  },
   {
     id: 4,
+    title: "Smart Notes Backend",
+    date: "December 2024",
+    description:
+      "Backend for a note-taking app, developed using Express.js to ensure efficient data management and seamless functionality.",
+    image: notAvailable,
+    tags: ["Full-Stack Application"],
+    category: "Self",
+    github: "https://github.com/alpha101001/SmartNotes-backend",
+    webapp: "https://github.com/alpha101001/SmartNotes-backend",
+    isLive: false,
+    liveURL: "https://smart-notes-five.vercel.app/",
+  },
+  {
+    id: 5,
+    title: "Portfolio",
+    date: "September 2024",
+    description:
+      "A personal portfolio website showcasing my skills, projects, and experiences. Built with React.js, Material UI, and Three.js, it offers a visually appealing and interactive experience for visitors.",
+    image: Portfolio,
+    tags: ["Front-End"],
+    category: "Self",
+    github: "https://github.com/alpha101001/Portfolio",
+    webapp: "https://github.com/alpha101001/Portfolio",
+    isLive: true,
+    liveURL: "https://alpha101001.github.io/Portfolio/",
+  },
+  {
+    id: 6,
     title: "DBMS Project",
     date: "March 2022 - April 2022",
     description:
@@ -385,26 +348,22 @@ export const projects: Project[] = [
     github: "https://github.com/alpha101001/DBMS_Project",
     webapp: "https://github.com/alpha101001/DBMS_Project",
     isLive: false,
-    liveURL:"",
+    liveURL: "",
   },
   {
-    id: 5,
+    id: 7,
     title: "Blogging-Site",
     date: "April 2022 - May 2022",
     description:
       "A dynamic and user-friendly blogging platform designed for everyday bloggers. Built with ASP.NET and a MySQL database, offering a seamless experience for sharing and exploring a diverse range of blog posts.",
     image: BloggingSite,
-    tags: ["C#     ", "MySQL     ", "ASP.NET     "],
+    tags: ["C#", "MySQL", "ASP.NET"],
     category: "Self",
-    github:
-      "https://github.com/alpha101001/Blogging-Site-Web-Project---ASP.NET-",
-    webapp:
-      "https://github.com/alpha101001/Blogging-Site-Web-Project---ASP.NET-",
-      isLive: false,
-      liveURL:"",
+    github: "https://github.com/alpha101001/Blogging-Site-Web-Project---ASP.NET-",
+    webapp: "https://github.com/alpha101001/Blogging-Site-Web-Project---ASP.NET-",
+    isLive: false,
+    liveURL: "",
   },
-
-  // Add other projects similarly
 ];
 
 export const conferencePapers: Project[] = [
@@ -414,7 +373,7 @@ export const conferencePapers: Project[] = [
       "A Scalable Cross-Border Payment System based on Consortium Blockchain Ensuring Auditability",
     date: "2023",
     description:
-      "Conference paper on Blockchain Technology. This paper presents a scalable cross-border payment system based on a consortium blockchain that ensures auditability and transparency.",
+      "First Author. This paper presents a scalable cross-border payment system based on a consortium blockchain that ensures auditability and transparency.",
     tags: ["Blockchain", "Solidity", "Polygon", "Thirdweb"],
     category: "Conference paper",
     paperLink: "https://ieeexplore.ieee.org/document/10427617",
@@ -425,7 +384,7 @@ export const conferencePapers: Project[] = [
       "Sociala: An Incentivized Decentralized Social Media for Writers based on Blockchain using modified Delegated Proof of Stake | 10th International Conference on Networking, Systems and Security",
     date: "2023",
     description:
-      "Conference paper on Blockchain Technology. This paper presents Sociala, a blockchain framework for writers that addresses decentralization challenges in social media. By using a modified DPoS algorithm, it enhances stability and mitigates vulnerabilities in existing systems.",
+      "Third Author. This paper presents Sociala, a blockchain framework for writers that addresses decentralization challenges in social media. By using a modified DPoS algorithm, it enhances stability and mitigates vulnerabilities in existing systems.",
     tags: ["Blockchain", "Solidity"],
     category: "Conference paper",
     paperLink: "https://dl.acm.org/doi/10.1145/3629188.3629198",
@@ -436,27 +395,11 @@ export const conferencePapers: Project[] = [
       "QEdu: A Quantum-Safe Blockchain Framework to Secure and Verify Educational Credentials",
     date: "2023",
     description:
-      "This paper presents QEdu, a consortium blockchain framework designed to secure educational credentials using quantum-safe Elgamal-like cryptography. It evaluates the vulnerability of existing blockchain architectures in education to quantum attacks and highlights the need for quantum-resistant solutions, demonstrating the effectiveness of the proposed approach.",
+      "Fourth Author. This paper presents QEdu, a consortium blockchain framework designed to secure educational credentials using quantum-safe Elgamal-like cryptography.",
     tags: ["Blockchain", "Solidity"],
     category: "Conference paper",
     paperLink: "https://ieeexplore.ieee.org/document/10441286",
   },
 ];
 
-export const timelineData: Timeline[] = [
-
-//   {
-//     year: 2016,
-//     text: "Started Higher Secondary education at Notre Dame College.",
-//   },
-//   {
-//     year: 2018,
-//     text: "Another phase change occurred, and I started my undergraduate studies at KUET, going through a challenging period for 3 years alongside my BSc in CSE.",
-//   },
-//   { year: 2022, text: "Returned to my passion for the pursuit of knowledge." },
-//   { year: 2023, text: "Achieved 3 conference papers related to my thesis." },
-//   {
-//     year: 2024,
-//     text: "Entered a new phase and began my journey as a Software Engineer at Sense & Respond Software LLC.",
-//   },
-];
+export const timelineData: Timeline[] = [];
