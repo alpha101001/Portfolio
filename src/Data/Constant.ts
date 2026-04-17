@@ -17,6 +17,19 @@ import WindowsOS from "../assets/WindowsOS.svg";
 import ParrotOS from "../assets/ParrotOS.png";
 import KaliLinuxOS from "../assets/KaliLinuxOS.svg";
 import FedoraOS from "../assets/FedoraOS.svg";
+import NextJs from "../assets/NextJs.svg";
+import Anthropic from "../assets/Anthropic.svg";
+import GoogleGemini from "../assets/GoogleGemini.svg";
+import Cursor from "../assets/Cursor.svg";
+import TailwindCSS from "../assets/TailwindCSS.svg";
+import NodeJs from "../assets/NodeJs.svg";
+import Go from "../assets/Go.svg";
+import Docker from "../assets/Docker.svg";
+import PostgreSQL from "../assets/PostgreSQL.svg";
+import MongoDB from "../assets/MongoDB.svg";
+import JavaScript from "../assets/JavaScript.svg";
+import Cpp from "../assets/Cpp.svg";
+import Antigravity from "../assets/Antigravity.svg";
 
 interface Bio {
   name: string;
@@ -106,25 +119,25 @@ export const skills: Skill[] = [
   {
     title: "AI & Agentic Engineering",
     skills: [
-      { name: "Antigravity" },
-      { name: "Cursor" },
-      { name: "Claude Code" },
-      { name: "Gemini CLI" },
-      { name: "Agent Skills" },
-      { name: "MCP Tools" },
-      { name: "Prompt Engineering" },
-      { name: "AI SDLC Management" },
+      { name: "Antigravity", image: Antigravity },
+      { name: "Cursor", image: Cursor },
+      { name: "Claude Code", image: Anthropic },
+      { name: "Gemini CLI", image: GoogleGemini },
+      { name: "Agent Skills", image: Anthropic },
+      { name: "MCP Tools", image: Anthropic },
+      { name: "Prompt Engineering", image: GoogleGemini },
+      { name: "AI SDLC Management", image: Antigravity },
     ],
   },
   {
     title: "Frameworks & Libraries",
     skills: [
-      { name: "Next.js" },
+      { name: "Next.js", image: NextJs },
       { name: "React.js", image: ReactIcon },
       { name: "Redux Toolkit", image: ReduxIcon },
       { name: "Zustand" },
-      { name: "Tailwind CSS" },
-      { name: "Node.js" },
+      { name: "Tailwind CSS", image: TailwindCSS },
+      { name: "Node.js", image: NodeJs },
       { name: "Ant Design" },
       { name: "Material UI", image: MaterialUi },
     ],
@@ -133,9 +146,9 @@ export const skills: Skill[] = [
     title: "Programming Languages",
     skills: [
       { name: "TypeScript", image: Typescript },
-      { name: "JavaScript (ES6+)" },
-      { name: "Go (Golang)" },
-      { name: "C++" },
+      { name: "JavaScript (ES6+)", image: JavaScript },
+      { name: "Go (Golang)", image: Go },
+      { name: "C++", image: Cpp },
       { name: "SQL" },
     ],
   },
@@ -152,9 +165,9 @@ export const skills: Skill[] = [
   {
     title: "Databases, DevOps & Infrastructure",
     skills: [
-      { name: "PostgreSQL" },
-      { name: "MongoDB" },
-      { name: "Docker" },
+      { name: "PostgreSQL", image: PostgreSQL },
+      { name: "MongoDB", image: MongoDB },
+      { name: "Docker", image: Docker },
       { name: "CI/CD Pipelines" },
       { name: "AWS (Basic)" },
       { name: "Linux" },
