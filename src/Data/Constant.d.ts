@@ -53,6 +53,8 @@ export interface Project {
     webapp?: string;
     members?: ProjectMember[];
     paperLink?: string;
+    isLive?: boolean;
+    liveURL?: string;
 }
 export interface Timeline {
     year: number;

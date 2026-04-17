@@ -1,5 +1,6 @@
 import React from "react";
 interface Experience {
+    id: number;
     image: string;
     company: string;
     role: string;
