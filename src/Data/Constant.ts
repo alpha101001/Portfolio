@@ -30,6 +30,12 @@ import MongoDB from "../assets/MongoDB.svg";
 import JavaScript from "../assets/JavaScript.svg";
 import Cpp from "../assets/Cpp.svg";
 import Antigravity from "../assets/Antigravity.svg";
+import Linux from "../assets/Linux.svg";
+import Git from "../assets/Git.svg";
+import AntDesign from "../assets/AntDesign.svg";
+import GithubActions from "../assets/GithubActions.svg";
+import AWS from "../assets/AWS.svg";
+import ShadhinMusic from "../assets/ShadhinMusic.svg";
 
 interface Bio {
   name: string;
@@ -138,7 +144,7 @@ export const skills: Skill[] = [
       { name: "Zustand" },
       { name: "Tailwind CSS", image: TailwindCSS },
       { name: "Node.js", image: NodeJs },
-      { name: "Ant Design" },
+      { name: "Ant Design", image: AntDesign },
       { name: "Material UI", image: MaterialUi },
     ],
   },
@@ -168,10 +174,10 @@ export const skills: Skill[] = [
       { name: "PostgreSQL", image: PostgreSQL },
       { name: "MongoDB", image: MongoDB },
       { name: "Docker", image: Docker },
-      { name: "CI/CD Pipelines" },
-      { name: "AWS (Basic)" },
-      { name: "Linux" },
-      { name: "Git" },
+      { name: "CI/CD Pipelines", image: GithubActions },
+      { name: "AWS (Basic)", image: AWS },
+      { name: "Linux", image: Linux },
+      { name: "Git", image: Git },
     ],
   },
   {
@@ -197,7 +203,7 @@ export const skills: Skill[] = [
 export const experiences: Experience[] = [
   {
     id: 0,
-    image: notAvailable,
+    image: ShadhinMusic,
     role: "Software Engineer",
     company: "Shadhin Music",
     date: "August 2025 - Present",
@@ -277,7 +283,7 @@ export const projects: Project[] = [
     date: "August 2025 - Present",
     description:
       "Engineered a performance and SEO overhaul of a Next.js music platform, boosting the Google Lighthouse score from 42 to 85 and increasing discoverable pages from 2 to over 500 through dynamic rendering systems and AI-assisted workflows.",
-    image: notAvailable,
+    image: ShadhinMusic,
     tags: ["Next.js", "JavaScript", "Tailwind CSS", "Zustand"],
     category: "Company",
     isLive: false,

@@ -7,7 +7,7 @@ import * as THREE from "three";
 
 const CanvasWrapperDiv = styled.div`
   width: 100%;
-  height: auto;
+  height: 100%;
   position: absolute;
   inset: 0;
 `;
@@ -43,7 +43,7 @@ const Stars: React.FC = (props) => {
 const StyledStarsCanvas: React.FC = () => {
     return (
         <CanvasWrapperDiv>
-            <Canvas camera={{ position: [0, 0, 1] }}>
+            <Canvas camera={{ position: [0, 0, 1] }} dpr={[1, 2]} gl={{ antialias: true }}>
                 <Suspense fallback={null}>
                     <Stars />
                 </Suspense>
