@@ -1,12 +1,18 @@
 import { css, keyframes, styled } from "styled-components";
 
 const reflectionSweep = keyframes`
-  from {
-    transform: translateX(-125%) rotate(14deg);
+  0% {
+    opacity: 0;
+    transform: translate3d(0, 0, 0) rotate(14deg);
   }
 
-  to {
-    transform: translateX(145%) rotate(14deg);
+  45% {
+    opacity: 0.58;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate3d(420%, 0, 0) rotate(14deg);
   }
 `;
 
@@ -41,10 +47,10 @@ const glassBase = css`
   }
 
   &::after {
-    top: -50%;
-    bottom: -50%;
-    left: -32%;
-    width: 32%;
+    top: -55%;
+    bottom: -55%;
+    left: -42%;
+    width: 38%;
     background: linear-gradient(
       90deg,
       transparent,
@@ -52,15 +58,11 @@ const glassBase = css`
       transparent
     );
     opacity: 0;
-    transform: translateX(-125%) rotate(14deg);
-    transition:
-      opacity ${({ theme }) => theme.transition.slow},
-      transform ${({ theme }) => theme.transition.slow};
+    transform: translate3d(0, 0, 0) rotate(14deg);
   }
 
   &:hover::after {
-    opacity: 0.6;
-    transform: translateX(145%) rotate(14deg);
+    animation: ${reflectionSweep} 820ms ease-out;
   }
 
   @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
@@ -109,7 +111,6 @@ export const glassHeroLens = css`
 export const glassShimmer = css`
   &::after {
     animation: ${reflectionSweep} 9s ease-in-out infinite;
-    opacity: 0.36;
   }
 
   @media (prefers-reduced-motion: reduce) {
