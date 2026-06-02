@@ -1,0 +1,7 @@
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <title>MCP Tools</title>
+  <circle cx="6" cy="12" r="3" fill="#D946EF"/>
+  <circle cx="18" cy="7" r="3" fill="#38D5FF"/>
+  <circle cx="18" cy="17" r="3" fill="#FACC15"/>
+  <path d="M8.6 10.7 15.4 8.2M8.6 13.3l6.8 2.5" stroke="#CBD5E1" stroke-width="1.6" stroke-linecap="round"/>
+</svg>

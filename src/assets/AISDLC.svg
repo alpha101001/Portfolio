@@ -1,0 +1,7 @@
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <title>AI SDLC</title>
+  <path d="M7 7a7 7 0 0 1 10 0l1.5 1.5" fill="none" stroke="#38D5FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M17 17a7 7 0 0 1-10 0L5.5 15.5" fill="none" stroke="#D946EF" stroke-width="2" stroke-linecap="round"/>
+  <path d="M18.5 5v3.5H15M5.5 19v-3.5H9" fill="none" stroke="#CBD5E1" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="12" cy="12" r="2.2" fill="#FACC15"/>
+</svg>

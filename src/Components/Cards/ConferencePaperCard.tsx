@@ -1,79 +1,65 @@
-import React from "react";
 import styled from "styled-components";
-import { Project } from "../../Data/Constant";
+import type { Project } from "../../Data/Constant";
+import { Card, SecondaryButtonLink, Tag } from "../UI/Primitives";
 
 interface ConferencePaperCardProps {
   paper: Project;
 }
 
-const Card = styled.div`
-  width: 500px;
-  background-color: #121212;
-  cursor: pointer;
-  border-radius: 10px;
-  box-shadow: 0 0 12px 4px rgba(0, 0, 0, 0.4);
-  overflow: hidden;
-  padding: 26px 20px;
+const PaperArticle = styled(Card)`
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Keeps the button at the bottom */
   gap: 14px;
-  transition: all 0.5s ease-in-out;
-  
-  &:hover {
-    transform: translateY(-1rem);
-    box-shadow: 0 0 50px 4px rgba(0, 0, 0, 0.6);
-    filter: brightness(1.1);
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    height: auto;
-  }
+  padding: 20px;
 `;
 
-
-const TitleDiv = styled.div`
-  font-size: 20px;
-  font-weight: 600;
-  color: #00E5FF;
+const PaperTitle = styled.h3`
+  margin: 0;
+  color: ${({ theme }) => theme.color.text};
+  font-size: 1rem;
+  line-height: 1.45;
 `;
 
-
-
-const PaperDescriptionDiv = styled.div`
-  font-weight: 400;
-  color: #AFC6C7;
-  margin-top: 8px;
-  overflow: hidden;
-  display: block;
-  text-overflow: ellipsis;
-  max-height: none; /* No height restrictions */
+const PaperDescription = styled.p`
+  margin: 0;
+  color: ${({ theme }) => theme.color.textMuted};
+  font-size: 0.95rem;
+  line-height: 1.6;
 `;
 
-const Button = styled.a`
-  color: #ff006e;
-  text-decoration: none;
-  font-weight: 600;
-  text-align: center; /* Center the button */
-  margin-top: auto; /* Push the button to the bottom */
-  display: block;
-  width: 100%; /* Ensures the button is centered */
-  &:hover {
-    color: #ffdd00;
-  }
+const PaperTags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
 `;
 
-const ConferencePaperCard: React.FC<ConferencePaperCardProps> = ({ paper }) => {
+const PaperButton = styled(SecondaryButtonLink)`
+  width: fit-content;
+  min-height: 40px;
+  padding: 0 14px;
+  font-size: 0.9rem;
+`;
+
+const ConferencePaperCard = ({ paper }: ConferencePaperCardProps) => {
   return (
-    <Card>
-      <TitleDiv>{paper.title}</TitleDiv>
+    <PaperArticle>
+      <PaperTitle>{paper.title}</PaperTitle>
+      <PaperDescription>{paper.description}</PaperDescription>
 
-      <PaperDescriptionDiv>{paper.description}</PaperDescriptionDiv>
-      <Button href={paper.paperLink} target="_blank">
-        View Paper
-      </Button>
-    </Card>
+      <PaperTags aria-label={`${paper.title} topics`}>
+        {paper.tags.map((tag) => (
+          <Tag key={`${paper.id}-${tag}`}>{tag}</Tag>
+        ))}
+      </PaperTags>
+
+      {paper.paperLink && (
+        <PaperButton href={paper.paperLink} target="_blank" rel="noreferrer">
+          View Paper
+        </PaperButton>
+      )}
+    </PaperArticle>
   );
 };
 

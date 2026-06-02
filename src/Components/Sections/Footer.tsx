@@ -1,116 +1,177 @@
-import React from "react";
+import { FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/fa";
 import styled from "styled-components";
-import { bio as Bio } from "../../Data/Constant";
-import {
-  FacebookRounded,
-  LinkedIn,
-} from "@mui/icons-material";
+import { bio } from "../../Data/Constant";
+import { glassChip, glassPanel } from "../UI/GlassStyles";
 
-const FooterContainer = styled.div`
-  width: 100%;
-  padding: 2rem 0;
-  display: flex;
-  justify-content: center;
-  z-index: 10;
+const footerLinks = [
+  { label: "About", href: "#About" },
+  { label: "Skills", href: "#Skills" },
+  { label: "Experience", href: "#Experience" },
+  { label: "Projects", href: "#Projects" },
+  { label: "Publications", href: "#ConferencePapers" },
+  { label: "Education", href: "#Education" },
+  { label: "Contact", href: "#Contact" },
+];
+
+const FooterContainer = styled.footer`
   position: relative;
+  z-index: ${({ theme }) => theme.zIndex.content};
+  padding: 24px;
 `;
 
 const FooterWrapper = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  align-items: center;
-  padding: 1rem;
-  color: ${({ theme }) => theme.text_primary};
+  ${glassPanel}
+  width: min(100%, ${({ theme }) => theme.layout.maxWidth});
+  margin: 0 auto;
+  display: grid;
+  gap: 20px;
+  justify-items: center;
+  text-align: center;
+  border-radius: ${({ theme }) => theme.radius.lg};
+  padding: 28px 24px;
 `;
 
-const LogoDiv = styled.div`
-  font-weight: 700;
-  font-size: 50px;
-  color: #03FBFB;
+const Logo = styled.a`
+  color: ${({ theme }) => theme.color.text};
+  font-size: clamp(1.35rem, 4vw, 1.9rem);
+  font-weight: 900;
+  line-height: 1.1;
+  text-decoration: none;
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 6px;
+  }
 `;
 
 const Nav = styled.ul`
-  width: 100%;
-  max-width: 800px;
-  margin-top: 0.5rem;
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  flex-wrap: wrap;
   justify-content: center;
-  @media (max-width: 768px) {
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    text-align: center;
-    font-size: 12px;
-  }
+  gap: 8px 18px;
+  list-style: none;
 `;
 
 const NavLink = styled.a`
-  color: ${({ theme }) => theme.text_primary};
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+  color: ${({ theme }) => theme.color.textMuted};
+  font-weight: 700;
   text-decoration: none;
-  font-size: 1.3rem;
-  transition: color 0.2s ease-in-out;
+  transition: color ${({ theme }) => theme.transition.fast};
+
   &:hover {
-    color: #d705fc;
-    scale: 1.2;
+    color: ${({ theme }) => theme.color.primary};
   }
-  @media (max-width: 768px) {
-    font-size: 1rem;
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 4px;
   }
 `;
 
-const SocialMediaIcons = styled.div`
+const SocialLinks = styled.div`
   display: flex;
-  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
 `;
 
-const SocialMediaIcon = styled.a`
-  display: inline-block;
-  margin: 0 1rem;
-  font-size: 1.5rem;
-  color: ${({ theme }) => theme.text_primary};
-  transition: color 0.2s ease-in-out;
+const SocialLink = styled.a`
+  ${glassChip}
+  width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${({ theme }) => theme.radius.pill};
+  color: ${({ theme }) => theme.color.text};
+  transition:
+    border-color ${({ theme }) => theme.transition.fast},
+    color ${({ theme }) => theme.transition.fast},
+    transform ${({ theme }) => theme.transition.fast};
+
   &:hover {
-    color: ${({ theme }) => theme.primary};
+    border-color: ${({ theme }) => theme.color.primary};
+    color: ${({ theme }) => theme.color.primary};
+    transform: translateY(-2px);
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
   }
 `;
 
 const Copyright = styled.p`
-  margin-top: 1.5rem;
-  font-size: 0.9rem;
-  color: ${({ theme }) => theme.soft2};
-  text-align: center;
+  margin: 0;
+  color: ${({ theme }) => theme.color.textSubtle};
+  font-size: 0.92rem;
 `;
 
-const Footer: React.FC = () => {
+const FooterNote = styled.p`
+  max-width: 620px;
+  margin: 0;
+  color: ${({ theme }) => theme.color.textMuted};
+  font-size: 0.95rem;
+  line-height: 1.6;
+`;
+
+const Footer = () => {
+  const year = new Date().getFullYear();
+
   return (
     <FooterContainer>
       <FooterWrapper>
-        <LogoDiv>Avishek Roy</LogoDiv>
-        <Nav>
-          <NavLink href="#About">About</NavLink>
-          <NavLink href="#Skills">Skills</NavLink>
-          <NavLink href="#Experience">Experience</NavLink>
-          <NavLink href="#Projects">Projects</NavLink>
-          <NavLink href="#ConferencePapers">Publications</NavLink>
-          <NavLink href="#Education">Education</NavLink>
-          {/* <NavLink href="#KnowMe">KnowMe</NavLink> */}
+        <Logo href="#About">Avishek Roy</Logo>
+        <FooterNote>
+          {bio.roleLine}. Based in {bio.location}; {bio.availability.toLowerCase()}.
+        </FooterNote>
+
+        <Nav aria-label="Footer navigation">
+          {footerLinks.map((link) => (
+            <li key={link.href}>
+              <NavLink href={link.href}>{link.label}</NavLink>
+            </li>
+          ))}
         </Nav>
-        <SocialMediaIcons>
-          <SocialMediaIcon href={Bio.facebook} target="display">
-            <FacebookRounded />
-          </SocialMediaIcon>
 
-          <SocialMediaIcon href={Bio.linkedin} target="display">
-            <LinkedIn />
-          </SocialMediaIcon>
+        <SocialLinks aria-label="Social links">
+          <SocialLink href={bio.github} target="_blank" rel="noreferrer" aria-label="GitHub">
+            <FaGithub aria-hidden="true" />
+          </SocialLink>
+          {bio.linkedin && (
+            <SocialLink
+              href={bio.linkedin}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedinIn aria-hidden="true" />
+            </SocialLink>
+          )}
+          {bio.facebook && (
+            <SocialLink
+              href={bio.facebook}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+            >
+              <FaFacebookF aria-hidden="true" />
+            </SocialLink>
+          )}
+        </SocialLinks>
 
-        </SocialMediaIcons>
-        <Copyright>&copy; 2024 Avishek Roy. All rights reserved.</Copyright>
+        <Copyright>&copy; {year} Avishek Roy. All rights reserved.</Copyright>
       </FooterWrapper>
     </FooterContainer>
   );

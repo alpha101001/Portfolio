@@ -1,289 +1,436 @@
-import React, { useState } from "react";
-import styled, { keyframes } from "styled-components";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { Typography } from "@mui/material";
+import { useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { FaGithub, FaLinkedinIn } from "react-icons/fa";
+import { FiBriefcase, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
+import styled, { css } from "styled-components";
+import { bio } from "../../Data/Constant";
+import { ContactFormData, sendContactMessage } from "../../Utils/Email";
+import { glassChip, glassControl } from "../UI/GlassStyles";
+import {
+  ButtonLink,
+  Card,
+  Eyebrow,
+  Section,
+  SectionDescription,
+  SectionHeader,
+  SectionInner,
+  SectionTitle,
+} from "../UI/Primitives";
 
-// Define the interface for the form data
-interface ContactFormData {
-  from_email: string;
-  from_name: string;
-  subject: string;
-  message: string;
-}
+type FormStatus = "idle" | "success" | "error";
 
-const NeonColorEffect = keyframes`
-  0%, 100% {
-    text-shadow: 0 0 4px #7f03fc, 0 0 8px #7f03fc, 0 0 12px #03eeff;
-  }
-  50% {
-    text-shadow: 0 0 2px #1303fc, 0 0 4px #03eeff, 0 0 6px #03eeff;
-  }
-`;
-// Define the animation for the tick mark
-const tickAnimation = keyframes`
-  0% {
-    stroke-dashoffset: 100;
-  }
-  100% {
-    stroke-dashoffset: 0;
-  }
-`;
+const ContactGrid = styled.div`
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1.2fr);
+  gap: 24px;
+  align-items: start;
 
-// Define the animation for the cross mark
-const crossAnimation = keyframes`
-  0% {
-    stroke-dashoffset: 100;
-  }
-  100% {
-    stroke-dashoffset: 0;
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr;
   }
 `;
 
-const TickContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100px;
+const ContactPanel = styled(Card)`
+  padding: 26px;
 `;
 
-const TickSVG = styled.svg`
-  width: 100px;
-  height: 100px;
-  stroke: green;
-  stroke-width: 5;
-  fill: none;
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: ${tickAnimation} 1s ease forwards;
+const PanelTitle = styled.h3`
+  margin: 0;
+  color: ${({ theme }) => theme.color.text};
+  font-size: 1.35rem;
 `;
 
-const CrossSVG = styled.svg`
-  width: 100px;
-  height: 100px;
-  stroke: red;
-  stroke-width: 5;
-  fill: none;
-  stroke-dasharray: 100;
-  stroke-dashoffset: 100;
-  animation: ${crossAnimation} 1s ease forwards;
+const PanelText = styled.p`
+  margin: 14px 0 0;
+  color: ${({ theme }) => theme.color.textMuted};
+  line-height: 1.75;
 `;
 
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  position: relative;
-  z-index: 1;
-  align-items: center;
-`;
-
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1100px;
+const TrustList = styled.ul`
+  display: grid;
   gap: 12px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
 `;
 
-const TitleDiv = styled.div`
-  font-size: 52px;
-  text-align: center;
-  font-weight: 600;
-  margin-top: 20px;
-  color: #fc03d7;
-  animation: ${NeonColorEffect} 3s infinite alternate;
-  @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
-  }
+const TrustItem = styled.li`
+  display: grid;
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
 `;
 
-const Desc = styled.div`
-  font-size: 18px;
-  text-align: center;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_secondary};
-  @media (max-width: 768px) {
-    font-size: 16px;
+const TrustIcon = styled.span`
+  ${glassChip}
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${({ theme }) => theme.radius.sm};
+  color: ${({ theme }) => theme.color.primary};
+`;
+
+const TrustContent = styled.div`
+  min-width: 0;
+`;
+
+const TrustLabel = styled.span`
+  display: block;
+  color: ${({ theme }) => theme.color.textSubtle};
+  font-size: 0.82rem;
+  font-weight: 700;
+`;
+
+const TrustValue = styled.span`
+  display: block;
+  color: ${({ theme }) => theme.color.text};
+  font-weight: 800;
+  overflow-wrap: anywhere;
+`;
+
+const TrustLink = styled.a`
+  color: ${({ theme }) => theme.color.text};
+  font-weight: 800;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color ${({ theme }) => theme.transition.fast};
+
+  &:hover {
+    color: ${({ theme }) => theme.color.primary};
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 4px;
   }
 `;
 
 const ContactForm = styled.form`
-  width: 95%;
-  max-width: 600px;
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(17, 25, 40, 0.83);
-  border: 1px solid rgba(255, 255, 255, 0.125);
-  padding: 32px;
-  border-radius: 12px;
-  box-shadow: rgba(23, 92, 230, 0.1) 0px 4px 24px;
-  margin-top: 28px;
-  gap: 12px;
+  display: grid;
+  gap: 16px;
 `;
 
-const ContactTitleDiv = styled.div`
-  font-size: 28px;
-  margin-bottom: 6px;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_primary};
+const Field = styled.div`
+  display: grid;
+  gap: 7px;
 `;
 
-const ContactInput = styled.input`
-  flex: 1;
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.text_secondary + 50};
-  outline: none;
-  font-size: 18px;
-  color: ${({ theme }) => theme.text_primary};
-  border-radius: 12px;
-  padding: 12px 16px;
-  &:focus {
-    border: 1px solid #03FBFB;
-  }
+const Label = styled.label`
+  color: ${({ theme }) => theme.color.text};
+  font-weight: 700;
 `;
 
-const ContactInputMessage = styled.textarea`
-  flex: 1;
-  background-color: transparent;
-  border: 1px solid ${({ theme }) => theme.text_secondary + 50};
-  outline: none;
-  font-size: 18px;
-  color: ${({ theme }) => theme.text_primary};
-  border-radius: 12px;
-  padding: 12px 16px;
-  &:focus {
-    border: 1px solid #03FBFB;
-  }
-`;
-
-const ContactButton = styled.input`
+const sharedFieldStyles = css`
   width: 100%;
-  text-decoration: none;
-  text-align: center;
-  background: hsla(271, 100%, 50%, 1);
-  padding: 13px 16px;
-  margin-top: 2px;
+  min-height: 48px;
+  border: 1px solid ${({ theme }) => theme.glass.border};
   border-radius: 12px;
-  border: none;
-  color: ${({ theme }) => theme.text_primary};
-  font-size: 18px;
-  font-weight: 600;
+  padding: 12px 14px;
+  color: ${({ theme }) => theme.color.text};
+  background: ${({ theme }) => theme.glass.panel};
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  box-shadow:
+    inset 0 1px 0 ${({ theme }) => theme.glass.highlight},
+    inset 0 -1px 0 rgba(56, 213, 255, 0.06);
+  transition:
+    border-color ${({ theme }) => theme.transition.fast},
+    box-shadow ${({ theme }) => theme.transition.fast},
+    background-color ${({ theme }) => theme.transition.fast};
+
+  &::placeholder {
+    color: ${({ theme }) => theme.color.textSubtle};
+  }
 `;
 
-const Contact: React.FC = () => {
-  const [emailSent, setEmailSent] = useState<"success" | "error" | null>(null); // State to track if email was sent or failed
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<ContactFormData>();
+const Input = styled.input`
+  ${sharedFieldStyles}
 
-  const onSubmit: SubmitHandler<ContactFormData> = (data) => {
-    const formData = new FormData();
-    formData.append('service_id', 'service_alpha');
-    formData.append('template_id', 'template_drv7ed4');
-    formData.append('user_id', 'cDTK7OE1cfnZJOvrS');
-    formData.append('from_email', data.from_email);
-    formData.append('from_name', data.from_name);
-    formData.append('subject', data.subject);
-    formData.append('message', data.message);
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 2px;
+    border-color: ${({ theme }) => theme.color.primary};
+  }
+`;
 
-    fetch('https://api.emailjs.com/api/v1.0/email/send-form', {
-      method: 'POST',
-      body: formData,
-    })
-      .then((response) => {
-        if (response.ok) {
-          setEmailSent("success"); // Show the tick mark
-          setTimeout(() => {
-            setEmailSent(null); // Hide the tick mark after 3 seconds
-            reset(); // Reset the form
-          }, 3000); // Tick mark is visible for 3 seconds
-        } else {
-          setEmailSent("error"); // Show the cross mark
-          setTimeout(() => {
-            setEmailSent(null); // Hide the cross mark after 3 seconds
-          }, 3000); // Cross mark is visible for 3 seconds
-        }
-      })
-      .catch(() => {
-        setEmailSent("error"); // Show the cross mark on failure
-        setTimeout(() => {
-          setEmailSent(null); // Hide the cross mark after 3 seconds
-        }, 3000); // Cross mark is visible for 3 seconds
-      });
+const TextArea = styled.textarea`
+  ${sharedFieldStyles}
+  min-height: 150px;
+  resize: vertical;
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 2px;
+    border-color: ${({ theme }) => theme.color.primary};
+  }
+`;
+
+const ErrorText = styled.p`
+  margin: 0;
+  color: ${({ theme }) => theme.color.danger};
+  font-size: 0.9rem;
+`;
+
+const StatusMessage = styled.p<{ $status: FormStatus }>`
+  min-height: 24px;
+  margin: 0;
+  color: ${({ $status, theme }) =>
+    $status === "success" ? theme.color.success : theme.color.danger};
+  font-weight: 700;
+`;
+
+const SubmitButton = styled.button`
+  ${glassControl}
+  min-height: 48px;
+  border-radius: ${({ theme }) => theme.radius.pill};
+  color: ${({ theme }) => theme.color.background};
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.34), transparent 42%),
+    linear-gradient(135deg, ${({ theme }) => theme.color.primary}, ${({ theme }) => theme.color.primaryStrong});
+  font-weight: 900;
+  transition:
+    background-color ${({ theme }) => theme.transition.fast},
+    border-color ${({ theme }) => theme.transition.fast},
+    color ${({ theme }) => theme.transition.fast};
+
+  &:hover:not(:disabled) {
+    border-color: ${({ theme }) => theme.color.warning};
+    background: ${({ theme }) => theme.color.warning};
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.62;
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 3px;
+  }
+`;
+
+const InlineLink = styled(ButtonLink)`
+  width: fit-content;
+  margin-top: 18px;
+
+  @media (max-width: 520px) {
+    width: 100%;
+  }
+`;
+
+const Contact = () => {
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const {
+    formState: { errors, isSubmitting },
+    handleSubmit,
+    register,
+    reset,
+  } = useForm<ContactFormData>({ mode: "onBlur" });
+
+  const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
+    setStatus("idle");
+
+    try {
+      await sendContactMessage(data);
+      setStatus("success");
+      reset();
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
-    <Container id="Education">
-      <Wrapper>
-        <TitleDiv>Contact</TitleDiv>
-        <Desc
-          style={{
-            marginBottom: "40px",
-          }}
-        >
-          Feel free to reach out to me for any questions or opportunities!
-        </Desc>
-        {emailSent === "success" ? (
-          <TickContainer>
-            <TickSVG viewBox="0 0 52 52">
-              <path
-                d="M26 1c13.807 0 25 11.193 25 25S39.807 51 26 51 1 39.807 1 26 12.193 1 26 1z"
-              />
-              <path d="M14 27l7 7 16-16" />
-            </TickSVG>
-          </TickContainer>
-        ) : emailSent === "error" ? (
-          <TickContainer>
-            <CrossSVG viewBox="0 0 52 52">
-              <path d="M26 1C12.746 1 1 12.746 1 26s11.746 25 25 25 25-11.746 25-25S39.254 1 26 1z" />
-              <path d="M16 16l20 20M36 16L16 36" />
-            </CrossSVG>
-          </TickContainer>
-        ) : (
-          <ContactForm onSubmit={handleSubmit(onSubmit)}>
-            <ContactTitleDiv>Email Me 🚀</ContactTitleDiv>
-            <ContactInput
-              placeholder="Your Email"
-              {...register("from_email", {
-                required: "Email is required",
-                pattern: {
-                  value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                  message: "Please enter a valid email address"
-                }
-              })}
-            />
-            {errors.from_email && <Typography sx={{ color: "#FB5303" }}>{errors.from_email.message}</Typography>}
+    <Section id="Contact">
+      <SectionInner>
+        <SectionHeader>
+          <Eyebrow>Contact</Eyebrow>
+          <SectionTitle>Let’s build something practical</SectionTitle>
+          <SectionDescription>
+            Send a focused note about an opportunity, collaboration, or engineering
+            problem. I will respond when the context is clear.
+          </SectionDescription>
+        </SectionHeader>
 
-            <ContactInput
-              placeholder="Your Name"
-              {...register("from_name", { required: "Name is required" })}
-            />
-            {errors.from_name && <Typography sx={{ color: "#FB5303" }}>{errors.from_name.message}</Typography>}
+        <ContactGrid>
+          <ContactPanel>
+            <PanelTitle>What works best</PanelTitle>
+            <PanelText>
+              Share the goal, current state, expected outcome, and any timeline or
+              constraints. Clear context helps me respond with useful next steps.
+            </PanelText>
 
-            <ContactInput
-              placeholder="Subject"
-              {...register("subject", { required: "Subject is required" })}
-            />
-            {errors.subject && <Typography sx={{ color: "#FB5303" }}>{errors.subject.message}</Typography>}
+            <TrustList aria-label="Contact context">
+              <TrustItem>
+                <TrustIcon>
+                  <FiMail aria-hidden="true" />
+                </TrustIcon>
+                <TrustContent>
+                  <TrustLabel>Email</TrustLabel>
+                  {bio.email ? (
+                    <TrustLink href={`mailto:${bio.email}`}>{bio.email}</TrustLink>
+                  ) : (
+                    <TrustValue>{bio.emailLabel}</TrustValue>
+                  )}
+                </TrustContent>
+              </TrustItem>
 
-            <ContactInputMessage
-              placeholder="Message"
-              {...register("message", { required: "Message is required" })}
-              rows={4}
-            />
-            {errors.message && <Typography sx={{ color: "#FB5303" }}>{errors.message.message}</Typography>}
+              {bio.phone && (
+                <TrustItem>
+                  <TrustIcon>
+                    <FiPhone aria-hidden="true" />
+                  </TrustIcon>
+                  <TrustContent>
+                    <TrustLabel>Phone</TrustLabel>
+                    <TrustLink href={`tel:${bio.phone.replace(/\s+/g, "")}`}>
+                      {bio.phone}
+                    </TrustLink>
+                  </TrustContent>
+                </TrustItem>
+              )}
 
-            <ContactButton type="submit" value="Send" />
-          </ContactForm>
-        )}
-      </Wrapper>
-    </Container>
+              <TrustItem>
+                <TrustIcon>
+                  <FaLinkedinIn aria-hidden="true" />
+                </TrustIcon>
+                <TrustContent>
+                  <TrustLabel>LinkedIn</TrustLabel>
+                  <TrustLink href={bio.linkedin ?? bio.github} target="_blank" rel="noreferrer">
+                    Professional profile
+                  </TrustLink>
+                </TrustContent>
+              </TrustItem>
+
+              <TrustItem>
+                <TrustIcon>
+                  <FaGithub aria-hidden="true" />
+                </TrustIcon>
+                <TrustContent>
+                  <TrustLabel>GitHub</TrustLabel>
+                  <TrustLink href={bio.github} target="_blank" rel="noreferrer">
+                    alpha101001
+                  </TrustLink>
+                </TrustContent>
+              </TrustItem>
+
+              <TrustItem>
+                <TrustIcon>
+                  <FiMapPin aria-hidden="true" />
+                </TrustIcon>
+                <TrustContent>
+                  <TrustLabel>Location</TrustLabel>
+                  <TrustValue>{bio.location}</TrustValue>
+                </TrustContent>
+              </TrustItem>
+
+              <TrustItem>
+                <TrustIcon>
+                  <FiBriefcase aria-hidden="true" />
+                </TrustIcon>
+                <TrustContent>
+                  <TrustLabel>Availability</TrustLabel>
+                  <TrustValue>{bio.availability}</TrustValue>
+                </TrustContent>
+              </TrustItem>
+            </TrustList>
+
+            <InlineLink href={bio.linkedin ?? bio.github} target="_blank" rel="noreferrer">
+              Open Professional Profile
+            </InlineLink>
+          </ContactPanel>
+
+          <ContactPanel>
+            <ContactForm onSubmit={handleSubmit(onSubmit)} noValidate>
+              <Field>
+                <Label htmlFor="from_name">Name</Label>
+                <Input
+                  id="from_name"
+                  autoComplete="name"
+                  aria-invalid={Boolean(errors.from_name)}
+                  aria-describedby={errors.from_name ? "from_name-error" : undefined}
+                  {...register("from_name", { required: "Name is required" })}
+                />
+                {errors.from_name && (
+                  <ErrorText id="from_name-error">{errors.from_name.message}</ErrorText>
+                )}
+              </Field>
+
+              <Field>
+                <Label htmlFor="from_email">Email</Label>
+                <Input
+                  id="from_email"
+                  type="email"
+                  autoComplete="email"
+                  spellCheck={false}
+                  aria-invalid={Boolean(errors.from_email)}
+                  aria-describedby={errors.from_email ? "from_email-error" : undefined}
+                  {...register("from_email", {
+                    required: "Email is required",
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: "Enter a valid email address",
+                    },
+                  })}
+                />
+                {errors.from_email && (
+                  <ErrorText id="from_email-error">{errors.from_email.message}</ErrorText>
+                )}
+              </Field>
+
+              <Field>
+                <Label htmlFor="subject">Subject</Label>
+                <Input
+                  id="subject"
+                  autoComplete="off"
+                  aria-invalid={Boolean(errors.subject)}
+                  aria-describedby={errors.subject ? "subject-error" : undefined}
+                  {...register("subject", { required: "Subject is required" })}
+                />
+                {errors.subject && (
+                  <ErrorText id="subject-error">{errors.subject.message}</ErrorText>
+                )}
+              </Field>
+
+              <Field>
+                <Label htmlFor="message">Message</Label>
+                <TextArea
+                  id="message"
+                  aria-invalid={Boolean(errors.message)}
+                  aria-describedby={errors.message ? "message-error" : undefined}
+                  {...register("message", {
+                    required: "Message is required",
+                    minLength: {
+                      value: 12,
+                      message: "Message should include at least 12 characters",
+                    },
+                  })}
+                />
+                {errors.message && (
+                  <ErrorText id="message-error">{errors.message.message}</ErrorText>
+                )}
+              </Field>
+
+              <SubmitButton type="submit" disabled={isSubmitting}>
+                {isSubmitting ? "Sending…" : "Send Message"}
+              </SubmitButton>
+
+              <div aria-live="polite">
+                {status === "success" && (
+                  <StatusMessage $status={status}>Message sent successfully.</StatusMessage>
+                )}
+                {status === "error" && (
+                  <StatusMessage $status={status}>
+                    Message could not be sent. Please try again or use the professional
+                    profile link.
+                  </StatusMessage>
+                )}
+              </div>
+            </ContactForm>
+          </ContactPanel>
+        </ContactGrid>
+      </SectionInner>
+    </Section>
   );
 };
 

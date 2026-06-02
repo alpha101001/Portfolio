@@ -1,87 +1,39 @@
-import React from "react";
-import { VerticalTimeline } from "react-vertical-timeline-component";
-import "react-vertical-timeline-component/style.min.css";
-import styled, { keyframes } from "styled-components";
 import { experiences } from "../../Data/Constant";
 import ExperienceCard from "../Cards/ExperienceCard";
-const NeonColorEffect = keyframes`
-  0%, 100% {
-    text-shadow: 0 0 4px #7f03fc, 0 0 8px #7f03fc, 0 0 12px #03eeff;
-  }
-  50% {
-    text-shadow: 0 0 2px #1303fc, 0 0 4px #03eeff, 0 0 6px #03eeff;
-  }
-`;
-const ParentContainerDiv = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 50px;
-  position: relative;
-  z-index: 1;
-  align-items: center;
-`;
+import {
+  Eyebrow,
+  Section,
+  SectionDescription,
+  SectionHeader,
+  SectionInner,
+  SectionTitle,
+  TimelineItem,
+  TimelineList,
+} from "../UI/Primitives";
 
-const ChildContainerDiv = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1100px;
-  gap: 12px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
-    
-`;
-const TitleDiv = styled.div`
-  font-size: 52px;
-  text-align: center;
-  font-weight: 600;
-  margin-top: 20px;
-  color: #fc03d7;
-  animation: ${NeonColorEffect} 3s infinite alternate;
-  @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
-  }    
-`;
-
-const WorkDescriptionDiv = styled.div`
-  font-size: 18px;
-  text-align: center;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_secondary};
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
-`;
-
-const Experience: React.FC = () => {
+const Experience = () => {
   return (
-    <ParentContainerDiv id="Experience">
-      <ChildContainerDiv>
-        <TitleDiv>Experience</TitleDiv>
-        <WorkDescriptionDiv
-          style={{
-            marginBottom: "40px",
-          }}
-        >
-          My work experience as a software engineer and currently working on here:
-        </WorkDescriptionDiv>
+    <Section id="Experience">
+      <SectionInner>
+        <SectionHeader>
+          <Eyebrow>Experience</Eyebrow>
+          <SectionTitle>Production and client engineering experience</SectionTitle>
+          <SectionDescription>
+            Full-time, remote, and freelance delivery across production frontend
+            systems, secure client work, real-time interfaces, REST integrations,
+            and AI-assisted delivery.
+          </SectionDescription>
+        </SectionHeader>
 
-        <VerticalTimeline>
-          {experiences.map((experience, index) => (
-            <ExperienceCard
-              key={`experience-${index}`}
-              experience={experience}
-            />
+        <TimelineList>
+          {experiences.map((experience) => (
+            <TimelineItem key={experience.id}>
+              <ExperienceCard experience={experience} />
+            </TimelineItem>
           ))}
-        </VerticalTimeline>
-      </ChildContainerDiv>
-    </ParentContainerDiv>
+        </TimelineList>
+      </SectionInner>
+    </Section>
   );
 };
 

@@ -1,204 +1,315 @@
-import React, { useEffect, useState } from "react";
-import { Link as LinkR } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { FiMenu, FiX } from "react-icons/fi";
+import { FaGithub } from "react-icons/fa";
 import styled from "styled-components";
-import { bio as Bio } from "../Data/Constant";
-import { MenuRounded } from "@mui/icons-material";
-const Nav = styled.div`
-  background-color: ${({ theme }) => theme.bg};
-  height: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2rem;
+import { bio } from "../Data/Constant";
+import { glassControl, glassPanel } from "./UI/GlassStyles";
+
+const navItems = [
+  { label: "About", href: "#About" },
+  { label: "Skills", href: "#Skills" },
+  { label: "Experience", href: "#Experience" },
+  { label: "Projects", href: "#Projects" },
+  { label: "Publications", href: "#ConferencePapers" },
+  { label: "Education", href: "#Education" },
+  { label: "Contact", href: "#Contact" },
+];
+
+const Nav = styled.header`
   position: sticky;
   top: 0;
-  z-index: 10;
-  color: yellow;
-  &::after {
-    content: '';
-    display: block;
-    width: 100%;
-    height: 1px; /* Adjust the thickness of the bottom line */
-    background-color: #02faf2; /* Set the bottom line color */
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-`;
-const NavbarContainer = styled.div`
+  inset-block-start: 0;
   width: 100%;
-  max-width: 1200px;
-  padding: 0 24px;
+  z-index: ${({ theme }) => theme.zIndex.nav};
+  padding: 12px 16px;
+  background: linear-gradient(180deg, rgba(7, 8, 20, 0.82), rgba(7, 8, 20, 0));
+`;
+
+const NavbarContainer = styled.nav`
+  ${glassPanel}
+  width: min(100%, ${({ theme }) => theme.layout.maxWidth});
+  min-height: 58px;
+  margin: 0 auto;
+  border-radius: ${({ theme }) => theme.radius.pill};
+  padding: 0 18px 0 22px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 1.1rem;
+  gap: 24px;
+
+  @media (max-width: 768px) {
+    padding: 0 18px;
+  }
 `;
-const NavLogo = styled(LinkR)`
-  width: 80%;
-  padding: 0 6px;
-  font-weight: 500;
-  font-size: 32px;
+
+const NavLogo = styled.a`
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: ${({ theme }) => theme.color.text};
+  font-size: 1.12rem;
+  font-weight: 800;
   text-decoration: none;
-  color: inherit;
+
+  &::before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: ${({ theme }) => theme.color.primary};
+    box-shadow: ${({ theme }) => theme.shadow.glow};
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 6px;
+  }
 `;
+
 const NavItems = styled.ul`
-  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 32px;
-  padding: 0 6px;
+  gap: 18px;
   list-style: none;
-  @media screen and (max-width: 768px) {
+
+  @media (max-width: 920px) {
     display: none;
   }
 `;
-const NavLink = styled.a<{ isOpen?: boolean }>`
-  color: ${({ isOpen }) => isOpen ? "#02faf2" : "#f5f7f7"};
-  font-weight: 500;
-  font-size: 18px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  text-decoration: none;
-  &:hover {
-    color: ${({ isOpen }) => isOpen ? "#f8fc05" : "#d705fc"};
-    scale: 1.2;
-  }
-`;
-const ButtonContainer = styled.div`
-  width: 80%;
-  height: 100%;
-  display: flex;
-  justify-content: end;
+
+const NavLink = styled.a`
+  position: relative;
+  min-height: 44px;
+  display: inline-flex;
   align-items: center;
-  padding: 0 6px;
-  @media screen and (max-width: 768px) {
-    display: none;
+  color: ${({ theme }) => theme.color.textMuted};
+  font-size: 0.94rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition:
+    color ${({ theme }) => theme.transition.fast},
+    transform ${({ theme }) => theme.transition.fast};
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 8px;
+    left: 0;
+    height: 2px;
+    border-radius: ${({ theme }) => theme.radius.pill};
+    background: ${({ theme }) => theme.color.primary};
+    opacity: 0;
+    transform: scaleX(0.65);
+    transition:
+      opacity ${({ theme }) => theme.transition.fast},
+      transform ${({ theme }) => theme.transition.fast};
+  }
+
+  &:hover {
+    color: ${({ theme }) => theme.color.primary};
+    transform: translateY(-1px);
+
+    &::after {
+      opacity: 1;
+      transform: scaleX(1);
+    }
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+
+    &::after {
+      transition: none;
+    }
+
+    &:hover {
+      transform: none;
+    }
+  }
+
+  @media (max-width: 920px) {
+    width: 100%;
+    justify-content: center;
   }
 `;
+
 const GithubButton = styled.a`
-  border: 1px solid #0dded7;
-  color: yellow;
+  ${glassControl}
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
   justify-content: center;
-  display: flex;
-  align-items: center;
-  border-radius: 20px;
-  cursor: pointer;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 500;
-  transition: all 0.3s ease-in-out;
+  gap: 10px;
+  border-radius: ${({ theme }) => theme.radius.pill};
+  padding: 0 16px;
+  color: ${({ theme }) => theme.color.text};
+  font-size: 0.94rem;
+  font-weight: 700;
   text-decoration: none;
+  transition:
+    background-color ${({ theme }) => theme.transition.fast},
+    border-color ${({ theme }) => theme.transition.fast},
+    color ${({ theme }) => theme.transition.fast};
+
   &:hover {
-    background: #faf602;
-    color: #000000;
-    scale: 1.1;
+    border-color: ${({ theme }) => theme.color.warning};
+    background: rgba(250, 204, 21, 0.12);
+    color: ${({ theme }) => theme.color.warning};
+  }
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 920px) {
+    display: none;
   }
 `;
-const MobileIcon = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  color: ${({ theme }) => theme.text_primary};
+
+const MobileMenuButton = styled.button`
+  ${glassControl}
+  width: 44px;
+  height: 44px;
   display: none;
-  @media screen and (max-width: 768px) {
-    display: block;
+  align-items: center;
+  justify-content: center;
+  border-radius: ${({ theme }) => theme.radius.sm};
+  color: ${({ theme }) => theme.color.text};
+
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 4px;
+  }
+
+  @media (max-width: 920px) {
+    display: inline-flex;
   }
 `;
-const MobileMenu = styled.ul<{ isOpen: boolean }>`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 12px 40px 24px 40px;
-  list-style: none;
-  background: ${({ theme }) => theme.card_light + 99};
-  position: absolute;
-  top: 70px; /* Positioned just below the red line */
-  right: 0;
-  transition: transform 2s cubic-bezier(0.68, -0.55, 0.27, 1.55),opacity 2s ease-in-out; /* Slower transition effect */
-  transform: ${({ isOpen }) =>
-    isOpen ? "translateY(0)" : "translateY(-100%)"}; /* Slide down */
-  border-radius: 0 0 20px 20px;
-  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  opacity: ${({ isOpen }) => (isOpen ? "1" : "0")}; /* Fade in */
-  z-index: ${({ isOpen }) => (isOpen ? "1000" : "-1")}; /* Hide when closed */
+
+const MobileMenu = styled.div`
+  display: none;
+
+  @media (max-width: 920px) {
+    ${glassPanel}
+    display: block;
+    width: min(100%, ${({ theme }) => theme.layout.maxWidth});
+    margin: 10px auto 0;
+    border-radius: ${({ theme }) => theme.radius.lg};
+  }
 `;
-const Navbar: React.FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
+
+const MobileMenuInner = styled.ul`
+  width: min(100%, ${({ theme }) => theme.layout.maxWidth});
+  margin: 0 auto;
+  padding: 14px 18px 24px;
+  display: grid;
+  gap: 8px;
+  list-style: none;
+`;
+
+const MobileGithubButton = styled(GithubButton)`
+  display: inline-flex;
+  width: 100%;
+  margin-top: 8px;
+`;
+
+const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth > 768) {
-        setIsOpen(false);
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
       }
     };
 
-    window.addEventListener('resize', handleResize);
+    const closeOnResize = () => {
+      if (window.innerWidth > 920) {
+        setIsMenuOpen(false);
+      }
+    };
 
-    // Ensure the menu is closed initially on larger screens
-    handleResize();
+    window.addEventListener("keydown", closeOnEscape);
+    window.addEventListener("resize", closeOnResize, { passive: true });
 
     return () => {
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener("keydown", closeOnEscape);
+      window.removeEventListener("resize", closeOnResize);
     };
   }, []);
-  return (
-    <Nav >
-      <NavbarContainer >
-        <NavLogo to="/"><b>Portfolio</b></NavLogo>
-        <MobileIcon onClick={() => setIsOpen(!isOpen)}>
-          <MenuRounded style={{ color: "yellow" }} />
-        </MobileIcon>
-        <NavItems>
-          <NavLink href="#About">About</NavLink>
-          <NavLink href="#Skills">Knowledge</NavLink>
-          <NavLink href="#Experience">Experience</NavLink>
-          <NavLink href="#Projects">Projects</NavLink>
-          <NavLink href="#ConferencePapers">Publications</NavLink>
-          <NavLink href="#Education">Education</NavLink>
-          {/* <NavLink href="#KnowMe">Know Me</NavLink> */}
 
+  const closeMenu = () => setIsMenuOpen(false);
+
+  return (
+    <Nav>
+      <NavbarContainer aria-label="Primary navigation">
+        <NavLogo href="#About" onClick={closeMenu}>
+          Avishek Roy
+        </NavLogo>
+
+        <NavItems>
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <NavLink href={item.href}>{item.label}</NavLink>
+            </li>
+          ))}
         </NavItems>
-        {isOpen && (
-          <MobileMenu isOpen={isOpen}>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#About" isOpen={isOpen}>
-              About
-            </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Skills" isOpen={isOpen}>
-              Skills
-            </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Experience" isOpen={isOpen}>
-              Experience
-            </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Projects" isOpen={isOpen}>
-              Projects
-            </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Publications" isOpen={isOpen}>
-              Publications
-            </NavLink>
-            <NavLink onClick={() => setIsOpen(!isOpen)} href="#Education" isOpen={isOpen}>
-              Education
-            </NavLink>
-            {/* <NavLink onClick={() => setIsOpen(!isOpen)} href="#KnowMe" isOpen={isOpen}>
-              KnowMe
-            </NavLink> */}
-            <GithubButton
-              href={Bio.github}
-              target="_blank"
-            >
-              Github Profile
-            </GithubButton>
-          </MobileMenu>
-        )}
-        <ButtonContainer>
-          <GithubButton href={Bio.github} target="_blank">
-            Github Profile
-          </GithubButton>
-        </ButtonContainer>
+
+        <GithubButton
+          href={bio.github}
+          target="_blank"
+          rel="noreferrer"
+          aria-label="Open Avishek Roy on GitHub"
+        >
+          <FaGithub aria-hidden="true" />
+          GitHub
+        </GithubButton>
+
+        <MobileMenuButton
+          type="button"
+          aria-label={isMenuOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-navigation"
+          onClick={() => setIsMenuOpen((current) => !current)}
+        >
+          {isMenuOpen ? <FiX aria-hidden="true" /> : <FiMenu aria-hidden="true" />}
+        </MobileMenuButton>
       </NavbarContainer>
+
+      {isMenuOpen && (
+        <MobileMenu id="mobile-navigation">
+          <MobileMenuInner>
+            {navItems.map((item) => (
+              <li key={item.href}>
+                <NavLink href={item.href} onClick={closeMenu}>
+                  {item.label}
+                </NavLink>
+              </li>
+            ))}
+            <li>
+              <MobileGithubButton
+                href={bio.github}
+                target="_blank"
+                rel="noreferrer"
+                onClick={closeMenu}
+              >
+                <FaGithub aria-hidden="true" />
+                GitHub
+              </MobileGithubButton>
+            </li>
+          </MobileMenuInner>
+        </MobileMenu>
+      )}
     </Nav>
   );
 };
+
 export default Navbar;

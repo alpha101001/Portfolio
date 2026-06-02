@@ -1,167 +1,147 @@
-import React, { useState } from "react";
-import styled, { keyframes } from "styled-components";
+import { useEffect, useMemo, useState } from "react";
+import styled from "styled-components";
 import { projects } from "../../Data/Constant";
 import ProjectCard from "../Cards/ProjectCard";
+import { glassControl, glassPanel } from "../UI/GlassStyles";
+import {
+  Eyebrow,
+  Section,
+  SectionDescription,
+  SectionHeader,
+  SectionInner,
+  SectionTitle,
+} from "../UI/Primitives";
 
-const NeonColorEffect = keyframes`
-  0%, 100% {
-    text-shadow: 0 0 4px #7f03fc, 0 0 8px #7f03fc, 0 0 12px #03eeff;
-  }
-  50% {
-    text-shadow: 0 0 2px #1303fc, 0 0 4px #03eeff, 0 0 6px #03eeff;
-  }
-`;
-const ParentContainerDiv = styled.div`
+const filters = [
+  { label: "All", value: "all" },
+  { label: "Personal", value: "Self" },
+  { label: "Company", value: "Company" },
+] as const;
+
+type ProjectFilter = (typeof filters)[number]["value"];
+
+const isProjectFilter = (value: string | null): value is ProjectFilter =>
+  filters.some((filter) => filter.value === value);
+
+const getInitialFilter = (): ProjectFilter => {
+  const params = new URLSearchParams(window.location.search);
+  const filter = params.get("project");
+
+  return isProjectFilter(filter) ? filter : "all";
+};
+
+const FilterGroup = styled.div`
+  ${glassPanel}
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto 32px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   justify-content: center;
-  margin-top: 50px;
-  padding: 0px 16px;
-  position: relative;
-  z-index: 1;
-  align-items: center;
-
-
+  gap: 8px;
+  border-radius: ${({ theme }) => theme.radius.pill};
+  padding: 6px;
 `;
 
-const ChildContainerDiv = styled.div`
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  max-width: 1100px;
-  gap: 12px;
-  @media (max-width: 960px) {
-    flex-direction: column;
-  }
-
-
-`;
-
-const TitleDiv = styled.div`
-  font-size: 52px;
-  text-align: center;
-  font-weight: 600;
-  margin-top: 20px;
-  color: #fc03d7;
-  animation: ${NeonColorEffect} 3s infinite alternate;
-  @media (max-width: 768px) {
-    margin-top: 12px;
-    font-size: 32px;
-  }
-
-`;
-
-const ProjectDescriptionDiv = styled.div`
-  font-size: 18px;
-  text-align: center;
-  font-weight: 600;
-  color: ${({ theme }) => theme.text_secondary};
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
-
-`;
-
-const ToggleButtonGroup = styled.div`
-  display: flex;
-  border: 1.5px solid ${({ theme }) => theme.primary};
-  color: ${({ theme }) => theme.primary};
-  font-size: 16px;
-  border-radius: 12px;
-  font-weight: 500;
-  margin: 22px 0;
-  @media (max-width: 768px) {
-    font-size: 12px;
-  }
-`;
-const ToggleButton = styled.div<{ $active: boolean }>`
-  padding: 8px 18px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  background: ${({ $active }) => ($active ? '#5F26AD' : 'transparent')};
-  color: ${({ $active }) => ($active ? '#ffffff' : '#a259ff')};
+const FilterButton = styled.button<{ $active: boolean }>`
+  ${glassControl}
+  min-height: 40px;
+  border-radius: ${({ theme }) => theme.radius.pill};
+  padding: 0 16px;
+  color: ${({ $active, theme }) =>
+    $active ? theme.color.background : theme.color.textMuted};
+  background: ${({ $active, theme }) =>
+    $active
+      ? `linear-gradient(135deg, ${theme.color.primary}, ${theme.color.primaryStrong})`
+      : theme.glass.control};
+  font-weight: 800;
+  transition:
+    background-color ${({ theme }) => theme.transition.fast},
+    color ${({ theme }) => theme.transition.fast};
 
   &:hover {
-    background: ${({ $active }) => ($active ? '#a259ff' : '#6a0dad')};
-    color: #ffffff; /* White on hover */
+    color: ${({ $active, theme }) =>
+      $active ? theme.color.background : theme.color.text};
+    background: ${({ $active, theme }) =>
+      $active ? theme.color.primary : theme.color.surfaceSoft};
   }
 
-  @media (max-width: 768px) {
-    padding: 6px 8px;
-    border-radius: 4px;
+  &:focus-visible {
+    outline: 3px solid ${({ theme }) => theme.color.focus};
+    outline-offset: 3px;
   }
 `;
-const Divider = styled.div`
-  width: 1.5px;
-  background: ${({ theme }) => theme.primary};
+
+const ProjectGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+
+  @media (max-width: 820px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
-const CardContainerDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  flex-wrap: wrap;
-  padding-top: 30px;
-`;
+const Projects = () => {
+  const [filter, setFilter] = useState<ProjectFilter>(getInitialFilter);
 
-const Projects: React.FC = () => {
-  const [toggle, setToggle] = useState("all");
+  const visibleProjects = useMemo(() => {
+    if (filter === "all") {
+      return projects;
+    }
+
+    return projects.filter((project) => project.category === filter);
+  }, [filter]);
+
+  useEffect(() => {
+    const url = new URL(window.location.href);
+
+    if (filter === "all") {
+      url.searchParams.delete("project");
+    } else {
+      url.searchParams.set("project", filter);
+    }
+
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  }, [filter]);
+
   return (
-    <ParentContainerDiv id="Projects">
-      <ChildContainerDiv>
-        <TitleDiv>Projects</TitleDiv>
-        <ProjectDescriptionDiv
-          style={{
-            marginBottom: "40px",
-          }}
-        >
-          I have worked on a wide range of projects. From web apps to android
-          apps. Here are some of my projects.
-        </ProjectDescriptionDiv>
+    <Section id="Projects">
+      <SectionInner>
+        <SectionHeader>
+          <Eyebrow>Projects</Eyebrow>
+          <SectionTitle>Selected work with practical outcomes</SectionTitle>
+          <SectionDescription>
+            Production work and personal systems presented by problem, solution, and
+            outcome so hiring teams can scan the engineering relevance quickly.
+          </SectionDescription>
+        </SectionHeader>
 
-        <ToggleButtonGroup>
-          <ToggleButton
-            $active={toggle === "all"}
-            onClick={() => setToggle("all")}
-          >
-            ALL
-          </ToggleButton>
-          <Divider />
-          <ToggleButton
-            $active={toggle === "Self"}
-            onClick={() => setToggle("Self")}
-          >
-            Personal Projects
-          </ToggleButton>
-          <Divider />
-          <ToggleButton
-            $active={toggle === "Company"}
-            onClick={() => setToggle("Company")}
-          >
-            Projects Worked on previous Company
-          </ToggleButton>
-          <Divider />
+        <FilterGroup aria-label="Project filters">
+          {filters.map((item) => (
+            <FilterButton
+              key={item.value}
+              type="button"
+              $active={filter === item.value}
+              aria-pressed={filter === item.value}
+              onClick={() => setFilter(item.value)}
+            >
+              {item.label}
+            </FilterButton>
+          ))}
+        </FilterGroup>
 
-        </ToggleButtonGroup>
-
-        <CardContainerDiv>
-          {toggle === "all" &&
-            projects.map((project, index) => (
-              <ProjectCard key={index} project={project} />
-            ))}
-          {projects
-            .filter((item) => item.category === toggle)
-            .map((project, index) => (
-              <ProjectCard key={index} project={project} />
-            ))}
-        </CardContainerDiv>
-      </ChildContainerDiv>
-    </ParentContainerDiv>
+        <ProjectGrid>
+          {visibleProjects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              featured={project.id === visibleProjects[0]?.id}
+            />
+          ))}
+        </ProjectGrid>
+      </SectionInner>
+    </Section>
   );
 };
 

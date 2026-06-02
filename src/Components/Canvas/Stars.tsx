@@ -1,82 +1,83 @@
-import React, { useRef, useState, Suspense, useMemo } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
-import { Points, PointMaterial, Preload } from "@react-three/drei";
-import * as random from "maath/random";
-import styled from "styled-components";
-import * as THREE from "three";
+import styled, { keyframes } from "styled-components";
 
-const CanvasWrapperDiv = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  inset: 0;
+const drift = keyframes`
+  from {
+    transform: translate3d(-2%, -1%, 0);
+  }
+
+  to {
+    transform: translate3d(2%, 1%, 0);
+  }
 `;
 
-const Stars: React.FC = (props) => {
-    const ref = useRef<THREE.Points>(null);
-    const [sphere] = useState(() =>
-        random.inSphere(new Float32Array(5000), { radius: 1.2 })
+const RefractiveField = styled.div`
+  position: fixed;
+  inset: 0;
+  z-index: ${({ theme }) => theme.zIndex.background};
+  pointer-events: none;
+  overflow: hidden;
+  background:
+    linear-gradient(115deg, rgba(56, 213, 255, 0.08), transparent 24%),
+    linear-gradient(245deg, rgba(217, 70, 239, 0.07), transparent 32%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.018) 0,
+      rgba(255, 255, 255, 0.018) 1px,
+      transparent 1px,
+      transparent 96px
+    ),
+    repeating-linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.012) 0,
+      rgba(255, 255, 255, 0.012) 1px,
+      transparent 1px,
+      transparent 96px
     );
+  opacity: 0.86;
 
-    // Circular alpha texture so points render as circles, not squares/ovals
-    const circleTexture = useMemo(() => {
-        const size = 64;
-        const canvas = document.createElement("canvas");
-        canvas.width = size;
-        canvas.height = size;
-        const ctx = canvas.getContext("2d")!;
-        const gradient = ctx.createRadialGradient(
-            size / 2, size / 2, 0,
-            size / 2, size / 2, size / 2
-        );
-        gradient.addColorStop(0, "rgba(255,255,255,1)");
-        gradient.addColorStop(0.4, "rgba(255,255,255,0.8)");
-        gradient.addColorStop(1, "rgba(255,255,255,0)");
-        ctx.fillStyle = gradient;
-        ctx.fillRect(0, 0, size, size);
-        return new THREE.CanvasTexture(canvas);
-    }, []);
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    inset: -12%;
+    animation: ${drift} 30s ease-in-out infinite alternate;
+  }
 
-    useFrame((_, delta) => {
-        if (ref.current) {
-            ref.current.rotation.x -= delta / 10;
-            ref.current.rotation.y -= delta / 15;
-        }
-    });
+  &::before {
+    background:
+      linear-gradient(112deg, transparent 8%, rgba(56, 213, 255, 0.13) 18%, transparent 31%),
+      linear-gradient(68deg, transparent 46%, rgba(255, 255, 255, 0.06) 52%, transparent 59%),
+      linear-gradient(138deg, transparent 62%, rgba(217, 70, 239, 0.12) 72%, transparent 84%);
+    filter: blur(18px);
+    opacity: 0.6;
+  }
 
-    return (
-        <group rotation={[0, 0, Math.PI / 4]}>
-            <Points ref={ref} positions={sphere as Float32Array} stride={3} frustumCulled {...props}>
-                <PointMaterial
-                    transparent
-                    color="#07bbf7"
-                    map={circleTexture}
-                    size={0.005}
-                    sizeAttenuation={true}
-                    depthWrite={false}
-                    alphaTest={0.01}
-                    vertexColors={false}
-                />
-            </Points>
-        </group>
-    );
-};
+  &::after {
+    background:
+      linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent),
+      repeating-linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.018) 0,
+        rgba(255, 255, 255, 0.018) 1px,
+        transparent 1px,
+        transparent 18px
+      );
+    opacity: 0.42;
+    mix-blend-mode: screen;
+    animation-duration: 44s;
+    animation-direction: alternate-reverse;
+  }
 
-const StyledStarsCanvas: React.FC = () => {
-    return (
-        <CanvasWrapperDiv>
-            <Canvas
-                camera={{ position: [0, 0, 1] }}
-                dpr={[1, 2]}
-                gl={{ antialias: true, alpha: true }}
-            >
-                <Suspense fallback={null}>
-                    <Stars />
-                </Suspense>
-                <Preload all />
-            </Canvas>
-        </CanvasWrapperDiv>
-    );
+  @media (prefers-reduced-motion: reduce) {
+    &::before,
+    &::after {
+      animation: none;
+    }
+  }
+`;
+
+const StyledStarsCanvas = () => {
+  return <RefractiveField aria-hidden="true" />;
 };
 
 export default StyledStarsCanvas;

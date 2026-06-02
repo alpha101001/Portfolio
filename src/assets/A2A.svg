@@ -1,0 +1,7 @@
+<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <title>A2A</title>
+  <path d="M5 8h11" stroke="#38D5FF" stroke-width="2" stroke-linecap="round"/>
+  <path d="m14 5 4 3-4 3" fill="none" stroke="#38D5FF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19 16H8" stroke="#D946EF" stroke-width="2" stroke-linecap="round"/>
+  <path d="m10 13-4 3 4 3" fill="none" stroke="#D946EF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
